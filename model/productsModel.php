@@ -1,7 +1,7 @@
 <?php
 //require "dbconnect.php";
 
-class Connection {
+class Crud {
 	public $connection;
 
 	public function __construct(PDO $connection = null) {
@@ -19,7 +19,9 @@ class Connection {
 		}
 	}
 	public function showAll() {
-		$sql = "SELECT * FROM `movies`"
+		$sql = "SELECT * FROM `films`";
 		$stm = $this->connection->prepare($sql);
+		$stm->execute();
+		return $stm->fetchAll();
 	}
 }
