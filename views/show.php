@@ -1,8 +1,5 @@
 <?php
-include "header.php";
-require "../model/productsModel.php";
-
-$obj = new Crud;
+//include "header.php";
 ?>
 <h2>Filmer</h2>
 <table>
@@ -14,19 +11,19 @@ $obj = new Crud;
 		<th>År</th>
 	</tr>
 	<?php 
-	foreach ($obj->showAll("films") as $value) {
-		extract($value);
+	foreach ($movielist as $row) {
 	?>
 	<tr>
-		<td><?php echo $title ?></td>
-		<td><?php echo $swedishTitle ?></td>
-		<td><?php echo $director ?></td>
-		<td><?php echo $country ?></td>
-		<td><?php echo $year ?></td>
+		<td><?php echo $movies->title; ?></td>
+		<td><?php echo $movies->altTitle; ?></td>
+		<td><?php echo $movies->director; ?></td>
+		<td><?php echo $movies->country; ?></td>
+		<td><?php echo $movies->year; ?></td>
+		<td><button class="btn btn-default"><a href="update.php?id=<?php echo $row['id']; ?>">Uppdatera</a></button></td>
+		<td><button class="btn btn-default"><a href="delete.php?id=<?php echo $row['id']; ?>">Ta bort</a></button></td>
 	</tr>
-	<?php
-	}
-	?>
+	<?php 
+	} ?>
 
 
 
@@ -34,5 +31,5 @@ $obj = new Crud;
 
 
 <?php
-include "footer.php";
+//include "footer.php";
 ?>
