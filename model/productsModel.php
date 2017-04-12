@@ -27,26 +27,30 @@ class MoviesCrud {
 		return $stm->fetch();
 	}
 
-	public function update(\Movies $movies) {
+	public function update($id, $title, $altTitle, $director, $country, $year) {
 		$sql = 'UPDATE `films` SET `title`=:title, `altTitle`=:altTitle, `director`=:director, `country`=:country, `year`=:year WHERE `id`=:id';
 		$stm = $this->db->prepare($sql);
-		$stm->bindparam(":id", $movies->getId());
-		$stm->bindparam(":title", $movies->setTitle($_POST['title']));
-		$stm->bindparam(":altTitle",$movies->setAltTitle($_POST['altTitle']));
-		$stm->bindparam(":director",$movies->setDirector($_POST['director']));
-		$stm->bindparam(":country",$movies->setCountry($_POST['country']));
-		$stm->bindparam(":year",$movies->setYear($_POST['year']));
-		return $stm->execute();
+		$stm->bindparam(":id", $id->getId());
+		$stm->bindparam(":title", $title->setTitle($_POST['title']));
+		$stm->bindparam(":altTitle",$altTitle->setAltTitle($_POST['altTitle']));
+		$stm->bindparam(":director",$director->setDirector($_POST['director']));
+		$stm->bindparam(":country",$country->setCountry($_POST['country']));
+		$stm->bindparam(":year",$year->setYear($_POST['year']));
+		$movies = $stm->execute();
+		return $movies;
 	}
 
-    public function create(\Movies $movies) {
+    public function create($title, $altTitle, $director, $country, $year) {
 		$sql = 'INSERT INTO `films` (`title`, `altTitle`, `director`, `country`, `year`) VALUES (:title, :altTitle, :director, :country, :year)';
 		$stm = $this->db->prepare($sql);
-        $stm->bindparam(":title", $movies->setTitle($_POST['title']));
-		$stm->bindparam(":altTitle",$movies->setAltTitle($_POST['altTitle']));
-		$stm->bindparam(":director",$movies->setDirector($_POST['director']));
-		$stm->bindparam(":country",$movies->setCountry($_POST['country']));
-		$stm->bindparam(":year",$movies->setYear($_POST['year']));
-		return $results = $stm->execute();
+        $stm->bindparam(":title", $title->getTitle());
+		$stm->bindparam(":altTitle",$altTitle->getAltTitle());
+		$stm->bindparam(":director",$director->getDirector());
+		$stm->bindparam(":country",$country->getCountry());
+		$stm->bindparam(":year",$year->getYear());
+		$movies=$stm->execute();
+        return $movies;
+        /*else
+		    echo "Error"; //@TODO*/
 	}
 }
