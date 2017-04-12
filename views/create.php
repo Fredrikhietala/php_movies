@@ -1,28 +1,29 @@
 <?php 
-// require "../model/productsModel.php";
+//require "../model/productsModel.php";
 include "header.php";
+
 ?>
 
 <form action="../index.php" method="post">
 	<div class="form-group">
-		<label>Title: </label>
-		<input type="text" name="title" class="form-control" id="title" required>
+		<label for="title">Title: </label>
+        <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
 	</div>
 	<div class="form-group">
-		<label>Alternative titel: </label>
-		<input type="text" name="altTitle" class="form-control" id="altTitle">
+		<label for="altTitle">Alternative titel: </label>
+		<input type="text" name="altTitle" class="form-control" id="altTitle" placeholder="Alternative titel">
 	</div>
 	<div class="form-group">
-		<label>Director: </label>
-		<input type="text" name="director" class="form-control" id="director" required>
+		<label for="director">Director: </label>
+		<input type="text" name="director" class="form-control" id="director" placeholder="Director" required>
 	</div>
 	<div class="form-group">
-		<label>Country: </label>
-		<input type="text" name="country" class="form-control" id="country" required>
+		<label for="country">Country: </label>
+		<input type="text" name="country" class="form-control" id="country" placeholder="Country" required>
 	</div>
 	<div class="form-group">
-		<label>Year: </label>
-		<input type="year" name="year" class="form-control" id="year" required>
+		<label for="year">Year: </label>
+		<input type="text" name="year" class="form-control" id="year" placeholder="Year" required>
 	</div>
 	<button type="submit" class="btn btn-default" name="insert">Insert new movie</button>
 </form>
