@@ -5,20 +5,24 @@ class Movies {
 
 	private $id;
 	private $title;
-	private $swedishTitle;
+	private $altTitle;
 	private $director;
 	private $country;
 	private $year;
 
-	public function __construct($id, $title, $altTitle, $director, $country, $year) {
+	public function __construct($data = null) {
 
-			$this->id = $id;
-			$this->title = $title;
-			$this->altTitle = $altTitle;
-			$this->director = $director;
-			$this->country = $country;
-			$this->year = $year;
+		if(is_array($data)){
+			if (isset($data['id'])) $this->id = $data['id'];
+		
+			$this->title = $data['title'];
+			$this->altTitle = $data['altTitle'];
+			$this->director = $data['director'];
+			$this->country = $data['country'];
+			$this->year = $data['year'];
+		}
 	}
+
 
 	public function getId() {
 		return $this->id;
@@ -27,30 +31,30 @@ class Movies {
 		return $this->title;
 	}
 	public function setTitle($title) {
-		$this->title = $title;
+		$this->title = $data['title'];
 	}
 	public function getAltTitle() {
 		return $this->altTitle;
 	}
 	public function setAltTitle($altTitle) {
-		$this->altTitle = $altTitle;
+		$this->altTitle = $data['altTitle'];
 	}
 	public function getDirector() {
 		return $this->director;
 	}
 	public function setDirector($director) {
-		$this->director = $director;
+		$this->director = $data['director'];
 	}
 	public function getCountry() {
 		return $this->country;
 	}
 	public function setCountry($country) {
-		$this->country = $country;
+		$this->country = $data['country'];
 	}
 	public function getYear() {
 		return $this->year;
 	}
 	public function setYear($year) {
-		$this->year = $year;
+		$this->year = $data['year'];
 	}
 }
