@@ -1,30 +1,36 @@
 <?php 
 require "../model/productsModel.php";
-//include "header.php";
-
-
+include "header.php";
+$update = new MoviesCrud($connection);
+$updateMovie = new Movies();
+$updateMovie = $update->getById($_REQUEST['edit_id']);
+var_dump($updateMovie = $update->getById($_REQUEST['edit_id']));
 ?>
 
-<form action="update.php" method="post">
+<form action="../index.php" method="post">
 	<div class="form-group">
-		<label>Titel: </label>
-		<input type="text" name="title" class="form-control" id="title" value="<?php $title ?>">
+		<label>Title: </label>
+		<input type="text" name="title" class="form-control" id="title" value="<?php $updateMovie->getTitle($_REQUEST['title']); ?>" required>
 	</div>
 	<div class="form-group">
-		<label>Svensk titel: </label>
-		<input type="text" name="swedishTitle" class="form-control" id="swedishTitle" value="<?php $swedishTitle ?>">
+		<label>Alternative title: </label>
+		<input type="text" name="altTitle" class="form-control" id="swedishTitle" value="<?php $updateMovie->getAltTitle(); ?>">
 	</div>
 	<div class="form-group">
-		<label>Regissör: </label>
-		<input type="text" name="director" class="form-control" id="director" value="<?php $director ?>">
+		<label>Director: </label>
+		<input type="text" name="director" class="form-control" id="director" value="<?php $updateMovie->getDirector(); ?>" required>
 	</div>
 	<div class="form-group">
-		<label>Land: </label>
-		<input type="text" name="country" class="form-control" id="country" value="<?php $country ?>">
+		<label>Country: </label>
+		<input type="text" name="country" class="form-control" id="country" value="<?php $updateMovie->getCountry(); ?>" required>
 	</div>
 	<div class="form-group">
-		<label>År: </label>
-		<input type="year" name="year" class="form-control" id="year" value="<?php $year ?>">
+		<label>Year: </label>
+		<input type="year" name="year" class="form-control" id="year" value="<?php $updateMovie->getYear(); ?>" required>
 	</div>
-	<button type="submit" class="btn btn-default" name="btn-update">Uppdatera</button>
+	<button type="submit" class="btn btn-default" name="btn-update">Update</button>
 </form>
+
+<?php 
+include "footer.php";
+?>

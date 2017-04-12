@@ -1,30 +1,33 @@
 <?php
-//include "header.php";
+include "header.php";
 ?>
 <h2>Filmer</h2>
-<table>
+<table class="table-striped">
 	<tr>
-		<th>Titel</th>
-		<th>Svensk titel</th>
-		<th>Regissör</th>
-		<th>Land</th>
-		<th>År</th>
+		<th>Title</th>
+		<th>Alternative title</th>
+		<th>Director</th>
+		<th>Country</th>
+		<th>Year</th>
 	</tr>
 	<?php 
-	foreach ($movielist as $row) {
+	foreach ($movies as $row):
 	?>
 	<tr>
-		<td><?php echo $movies->title; ?></td>
-		<td><?php echo $movies->altTitle; ?></td>
-		<td><?php echo $movies->director; ?></td>
-		<td><?php echo $movies->country; ?></td>
-		<td><?php echo $movies->year; ?></td>
-		<td><button class="btn btn-default"><a href="update.php?id=<?php echo $row['id']; ?>">Uppdatera</a></button></td>
-		<td><button class="btn btn-default"><a href="delete.php?id=<?php echo $row['id']; ?>">Ta bort</a></button></td>
+		<td><?php echo $row->getTitle(); ?></td>
+		<td><?php echo $row->getAltTitle(); ?></td>
+		<td><?php echo $row->getDirector(); ?></td>
+		<td><?php echo $row->getCountry(); ?></td>
+		<td><?php echo $row->getYear(); ?></td>
+		<td><button class="btn btn-default" name="btn-edit" id="edit"><a href="views/update.php?edit_id=<?php echo $row->getId(); ?>">Uppdatera</a></button></td>
+		<td><button class="btn btn-default"><a href="views/show.php?del_id=<?php echo $row->getId(); ?>">Ta bort</a></button></td>
 	</tr>
-	<?php 
-	} ?>
-
+	<?php endforeach ?>
+	<tr>
+	<th colspan="8" align="right">
+		<button class="btn btn-default" name="btn-create" id="create"><a href="views/create.php">Lägg till</a></button>
+	</th>
+	</tr>
 
 
 </table>
