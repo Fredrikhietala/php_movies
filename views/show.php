@@ -11,7 +11,7 @@ include "header.php";
 		<th>Year</th>
 	</tr>
 	<?php 
-	foreach ($movies as $row):
+	foreach ($movie as $row):
 	?>
 	<tr>
 		<td><?php echo $row->getTitle(); ?></td>
@@ -19,13 +19,13 @@ include "header.php";
 		<td><?php echo $row->getDirector(); ?></td>
 		<td><?php echo $row->getCountry(); ?></td>
 		<td><?php echo $row->getYear(); ?></td>
-		<td><button class="btn btn-default" name="btn-edit" id="edit"><a href="views/update.php?edit_id=<?php echo $row->getId(); ?>">Uppdatera</a></button></td>
-		<td><button class="btn btn-default"><a href="views/show.php?del_id=<?php echo $row->getId(); ?>">Ta bort</a></button></td>
+		<td><button class="btn btn-default" name="btn-edit" id="edit"><a href="../views/update.php?edit_id=<?php echo $row->getId(); ?>">Update</a></button></td>
+		<td><button class="btn btn-default"><a href="../views/show.php?del_id=<?php echo $row->getId(); ?>">Delete</a></button></td>
 	</tr>
 	<?php endforeach ?>
 	<tr>
 	<th colspan="8" align="right">
-		<button class="btn btn-default" name="btn-create" id="create"><a href="views/create.php">Lägg till</a></button>
+        <button class="btn btn-default" name="btn-create" id="create"><a href="../views/create.php">Create</a></button>
 	</th>
 	</tr>
 
