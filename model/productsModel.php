@@ -1,7 +1,8 @@
 <?php
 require "movies.php";
 
-$movies = new Movies();
+$movie = new Movies();
+global $movie;
 
 class MoviesCrud {
 	private $db;
@@ -19,9 +20,9 @@ class MoviesCrud {
 	}
 
 	public function getById($id) {
-		$sql = 'SELECT "Movies", films.* FROM `films` WHERE `id`= :id';
+		$sql = 'SELECT * FROM `films` WHERE `id`= :id';
 		$stm = $this->db->prepare($sql);
-		$stm->bindparam(':id', $id);
+		$stm->bindparam(":id", $id);
 		$stm->execute();
 		$stm->setFetchMode(PDO::FETCH_CLASS, 'Movies');
 		return $stm->fetch();
@@ -31,11 +32,11 @@ class MoviesCrud {
 		$sql = 'UPDATE `films` SET `title`=:title, `altTitle`=:altTitle, `director`=:director, `country`=:country, `year`=:year WHERE `id`=:id';
 		$stm = $this->db->prepare($sql);
 		$stm->bindparam(":id", $id->getId());
-		$stm->bindparam(":title", $title->setTitle($_POST['title']));
-		$stm->bindparam(":altTitle",$altTitle->setAltTitle($_POST['altTitle']));
-		$stm->bindparam(":director",$director->setDirector($_POST['director']));
-		$stm->bindparam(":country",$country->setCountry($_POST['country']));
-		$stm->bindparam(":year",$year->setYear($_POST['year']));
+		$stm->bindparam(":title", $title->getTitle());
+		$stm->bindparam(":altTitle",$altTitle->getAltTitle());
+		$stm->bindparam(":director",$director->getDirector());
+		$stm->bindparam(":country",$country->getCountry());
+		$stm->bindparam(":year",$year->getYear());
 		$movies = $stm->execute();
 		return $movies;
 	}
@@ -48,9 +49,10 @@ class MoviesCrud {
 		$stm->bindparam(":director",$director->getDirector());
 		$stm->bindparam(":country",$country->getCountry());
 		$stm->bindparam(":year",$year->getYear());
-		$movies=$stm->execute();
-        return $movies;
-        /*else
-		    echo "Error"; //@TODO*/
+		if (!empty($movies=$stm->execute())) {
+            return $movies;
+        }
+        else
+		    return false; //@TODO
 	}
 }
