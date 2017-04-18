@@ -3,9 +3,16 @@ require "model/productsModel.php";
 
 $obj = new MoviesCrud($connection);
 
+
 if (!empty($movie)) {
     $movie = $obj->readAll();
     include "views/show.php";
+
+    if (isset($_POST['btn-delete'])) {
+        $id = $_REQUEST['delete'];
+        $movie = $obj->delete($id);
+        header("Location: index.php");
+    }
 }
 //var_dump($movies = $obj->getById(2));
 /*if (isset($_POST['btn-create'])) {
