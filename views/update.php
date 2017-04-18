@@ -2,14 +2,33 @@
 require "../model/productsModel.php";
 include "header.php";
 $update = new MoviesCrud($connection);
-$updateMovie = new Movies();
+$updateMovie = new Movies($connection);
 $updateMovie = $update->getById($_REQUEST['edit_id']);
-var_dump($updateMovie = $update->getById($_REQUEST['edit_id']));
-echo "<br>";
-var_dump($updateMovie->getTitle('edit_id'));
+//var_dump($updateMovie = $update->getById($_REQUEST['edit_id']));
+//var_dump($updateMovie->getTitle('edit_id'));
+
+if (isset($_POST['btn-update'])) {
+    $id = $this->updateMovie->getId();
+    $title = $this->updateMovie->setTitle($_POST['title']);
+    $altTitle = $this->updateMovie->setAltTitle($_POST['altTitle']);
+    $director = $this->updateMovie->setDirector($_POST['director']);
+    $country = $this->updateMovie->setCountry($_POST['country']);
+    $year = $this->updateMovie->setYear($_POST['year']);
+
+    if ($movies = $update->update($id, $title, $altTitle, $director, $country, $year)) {
+        echo "<p>Record was successfully updated</p>";
+        header("Location: index.php");
+        //include "views/show.php";
+    }
+    else {
+        echo "Error";
+        header("Location: ../views/update.php");
+        //include "views/show.php";
+    }
+}
 ?>
 
-<form action="../index.php" method="post">
+<form action="update.php" method="post">
 	<div class="form-group">
 		<label for="title">Title: </label>
 		<input type="text" name="title" class="form-control" id="title" value="<?php echo $updateMovie->getTitle(); ?>" required>
