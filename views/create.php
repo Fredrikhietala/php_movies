@@ -1,8 +1,8 @@
 <?php 
-require "../model/productsModel.php";
+//require "../model/productsModel.php";
 require "header.php";
 
-$insert = new MoviesCrud($connection);
+/*$insert = new MoviesCrud($connection);
 $insertMovie = new Movies($connection);
 
 
@@ -25,21 +25,18 @@ if (isset($_POST['insert'])) {
         echo "<div class='alert alert-danger'>Unable to insert movie</div>";
         header("Location: ../views/create.php");
     }
-}
-
-//Fatal error: Uncaught Error: Call to a member function getTitle() on string in C:\MAMP\htdocs\php_movies\model\productsModel.php:47 Stack trace: #0 C:\MAMP\htdocs\php_movies\views\create.php(15): MoviesCrud->create('Stand By Me', '', 'Rob Reiner', 'USA', '1986') #1 {main} thrown in C:\MAMP\htdocs\php_movies\model\productsModel.php on line 47
-//Fatal error: Uncaught Error: Call to a member function setTitle() on null in C:\MAMP\htdocs\php_movies\views\create.php:9 Stack trace: #0 {main} thrown in C:\MAMP\htdocs\php_movies\views\create.php on line 9
+}*/
 
 ?>
 
-<form action="create.php" method="post">
+<form action="../index.php" method="post">
 	<div class="form-group">
 		<label for="title">Title: </label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
 	</div>
 	<div class="form-group">
 		<label for="altTitle">Alternative title: </label>
-		<input type="text" name="altTitle" class="form-control" id="altTitle" placeholder="Alternative titel">
+		<input type="text" name="altTitle" class="form-control" id="altTitle" placeholder="Alternative title">
 	</div>
 	<div class="form-group">
 		<label for="director">Director: </label>
