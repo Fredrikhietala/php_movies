@@ -38,7 +38,7 @@ if (isset($_POST['insert'])) {
         <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
 	</div>
 	<div class="form-group">
-		<label for="altTitle">Alternative titel: </label>
+		<label for="altTitle">Alternative title: </label>
 		<input type="text" name="altTitle" class="form-control" id="altTitle" placeholder="Alternative titel">
 	</div>
 	<div class="form-group">
