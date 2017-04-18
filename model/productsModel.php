@@ -42,13 +42,14 @@ class MoviesCrud {
 	}
 
     public function create($title, $altTitle, $director, $country, $year) {
+	    global $movie;
 		$sql = 'INSERT INTO `films` (`title`, `altTitle`, `director`, `country`, `year`) VALUES (:title, :altTitle, :director, :country, :year)';
 		$stm = $this->db->prepare($sql);
-        $stm->bindparam(":title", $title->movie->getTitle());
-		$stm->bindparam(":altTitle",$altTitle->movie->getAltTitle());
-		$stm->bindparam(":director",$director->movie->getDirector());
-		$stm->bindparam(":country",$country->movie->getCountry());
-		$stm->bindparam(":year",$year->movie->getYear());
+        $stm->bindparam(":title", $title);
+		$stm->bindparam(":altTitle",$altTitle);
+		$stm->bindparam(":director",$director);
+		$stm->bindparam(":country",$country);
+		$stm->bindparam(":year",$year);
 		if (!empty($movies=$stm->execute())) {
             return $movies;
         }
