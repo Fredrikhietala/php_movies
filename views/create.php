@@ -3,16 +3,17 @@ require "../model/productsModel.php";
 include "header.php";
 
 $insert = new MoviesCrud($connection);
-//$insertMovie = new Movies();
+$insertMovie = new Movies($connection);
 
 if (isset($_POST['insert'])) {
-    $array = $movie->setTitle($_POST['title']);
-    $array = $movie->setAltTitle($_POST['altTitle']);
-    $array = $movie->setDirector($_POST['director']);
-    $array = $movie->setCountry($_POST['country']);
-    $array = $movie->setYear($_POST['year']);
+    $title = $this->insertMovie->setTitle($_POST['title']);
+    $altTitle = $this->insertMovie->setAltTitle($_POST['altTitle']);
+    $director = $this->insertMovie->setDirector($_POST['director']);
+    $country = $this->insertMovie->setCountry($_POST['country']);
+    $year = $this->insertMovie->setYear($_POST['year']);
 
-    if ($movies = $insert->create($array)) {
+    var_dump($movies = $insert->create($title, $altTitle, $director, $country, $year));
+    if ($movies = $insert->create($title, $altTitle, $director, $country, $year)) {
         echo "<div class='alert alert-success'>Movie was inserted</div>";
         header("Location: index.php");
     } else {
@@ -20,6 +21,8 @@ if (isset($_POST['insert'])) {
         header("Location: ../views/create.php");
     }
 }
+
+//Fatal error: Uncaught Error: Call to a member function getTitle() on string in C:\MAMP\htdocs\php_movies\model\productsModel.php:47 Stack trace: #0 C:\MAMP\htdocs\php_movies\views\create.php(15): MoviesCrud->create('Stand By Me', '', 'Rob Reiner', 'USA', '1986') #1 {main} thrown in C:\MAMP\htdocs\php_movies\model\productsModel.php on line 47
 
 ?>
 
