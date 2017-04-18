@@ -1,28 +1,34 @@
 <?php 
 require "../model/productsModel.php";
-include "header.php";
+require "header.php";
 
 $insert = new MoviesCrud($connection);
 $insertMovie = new Movies($connection);
 
-if (isset($_POST['insert'])) {
-    $title = $this->insertMovie->setTitle($_POST['title']);
-    $altTitle = $this->insertMovie->setAltTitle($_POST['altTitle']);
-    $director = $this->insertMovie->setDirector($_POST['director']);
-    $country = $this->insertMovie->setCountry($_POST['country']);
-    $year = $this->insertMovie->setYear($_POST['year']);
 
-    var_dump($movies = $insert->create($title, $altTitle, $director, $country, $year));
+if (isset($_POST['insert'])) {
+    $title = $_POST['title'];
+    $insertMovie->setTitle($title);
+    $altTitle = $_POST['altTitle'];
+    $insertMovie->setAltTitle($altTitle);
+    $director = $_POST['director'];
+    $insertMovie->setDirector($director);
+    $country = $_POST['country'];
+    $insertMovie->setCountry($country);
+    $year = $_POST['year'];
+    $insertMovie->setYear($year);
+
     if ($movies = $insert->create($title, $altTitle, $director, $country, $year)) {
         echo "<div class='alert alert-success'>Movie was inserted</div>";
-        header("Location: index.php");
+        header("Location: ../index.php");
     } else {
-        echo "<div class='alert alert-danger'>Unable to insert product</div>";
+        echo "<div class='alert alert-danger'>Unable to insert movie</div>";
         header("Location: ../views/create.php");
     }
 }
 
 //Fatal error: Uncaught Error: Call to a member function getTitle() on string in C:\MAMP\htdocs\php_movies\model\productsModel.php:47 Stack trace: #0 C:\MAMP\htdocs\php_movies\views\create.php(15): MoviesCrud->create('Stand By Me', '', 'Rob Reiner', 'USA', '1986') #1 {main} thrown in C:\MAMP\htdocs\php_movies\model\productsModel.php on line 47
+//Fatal error: Uncaught Error: Call to a member function setTitle() on null in C:\MAMP\htdocs\php_movies\views\create.php:9 Stack trace: #0 {main} thrown in C:\MAMP\htdocs\php_movies\views\create.php on line 9
 
 ?>
 
