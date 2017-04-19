@@ -7,7 +7,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Filmer</title>
 
@@ -37,9 +36,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="../index.php">Home</a></li>
-            <li><a href="../views/create.php">Create</a></li>
-            <li><a href="../views/update.php">Update</a></li>
+            <li><a href="../index.php?page=start">Home</a></li>
+            <li><a href="../index.php?page=show">Show</a></li>
+            <li><a href="../index.php?page=create">Create</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
