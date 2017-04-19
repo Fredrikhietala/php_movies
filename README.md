@@ -8,4 +8,5 @@
 <li>HTML</li>
 <li>CSS</li>
 </ul>
-
+<p>Mail: hietala.fredrik@gmail.com</p>
+<p><a href="https://www.linkedin.com/in/fredrik-hietala-4a8a4467/">LinkedIn</a></p>
