@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+require "header.php";
 ?>
 <h2>Filmer</h2>
 <table class="table-striped">
@@ -39,5 +39,5 @@ include "header.php";
 
 
 <?php
-//include "footer.php";
+require "footer.php";
 ?>

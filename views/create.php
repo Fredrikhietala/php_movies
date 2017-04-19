@@ -54,5 +54,5 @@ if (isset($_POST['insert'])) {
 </form>
 
 <?php
-include "footer.php";
+require "footer.php";
 ?>

@@ -59,5 +59,5 @@ if (isset($_POST['btn-update'])) {
 </form>
 
 <?php
-include "footer.php";
+require "footer.php";
 ?>
