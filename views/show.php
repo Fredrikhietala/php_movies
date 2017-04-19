@@ -19,25 +19,18 @@ require "header.php";
 		<td><?php echo $row->getDirector(); ?></td>
 		<td><?php echo $row->getCountry(); ?></td>
 		<td><?php echo $row->getYear(); ?></td>
-		<td><button class="btn btn-default" name="btn-edit" id="edit"><a href="../views/update.php?edit_id=<?php echo $row->getId(); ?>">Update</a></button></td>
+		<td><button class="btn btn-default" name="btn-edit" id="edit"><a href="../index.php?page=update&edit_id=<?php echo $row->getId(); ?>">Update</a></button></td>
 		<td>
-            <form action="../index.php" method="post">
+            <form action="../index.php?page=show" method="post">
                 <input type="hidden" name="delete" value="<?php echo $row->getId(); ?>"/>
                 <button type="submit" class="btn btn-default" name="btn-delete">Delete</button>
             </form>
         </td>
 	</tr>
 	<?php endforeach ?>
-	<tr>
-	<th colspan="8" align="right">
-        <button class="btn btn-default" name="btn-create" id="create"><a href="../views/create.php">Create</a></button>
-	</th>
-	</tr>
-
-
 </table>
 
 
 <?php
-require "footer.php";
+//require "footer.php";
 ?>
