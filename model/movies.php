@@ -10,7 +10,7 @@ class Movies {
 	private $country;
 	private $year;
 
-	public function __construct($data = true) {
+	public function __construct($data = null) {
 
 		if(is_array($data)){
 			if (isset($data['id'])) $this->id = $data['id'];
