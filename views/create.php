@@ -1,35 +1,8 @@
-<?php 
-//require "../model/productsModel.php";
+<?php
 require "header.php";
-
-/*$insert = new MoviesCrud($connection);
-$insertMovie = new Movies($connection);
-
-
-if (isset($_POST['insert'])) {
-    $title = $_POST['title'];
-    $insertMovie->setTitle($title);
-    $altTitle = $_POST['altTitle'];
-    $insertMovie->setAltTitle($altTitle);
-    $director = $_POST['director'];
-    $insertMovie->setDirector($director);
-    $country = $_POST['country'];
-    $insertMovie->setCountry($country);
-    $year = $_POST['year'];
-    $insertMovie->setYear($year);
-
-    if ($movies = $insert->create($title, $altTitle, $director, $country, $year)) {
-        echo "<div class='alert alert-success'>Movie was inserted</div>";
-        header("Location: ../index.php");
-    } else {
-        echo "<div class='alert alert-danger'>Unable to insert movie</div>";
-        header("Location: ../views/create.php");
-    }
-}*/
-
 ?>
 
-<form action="../index.php" method="post">
+<form action="../index.php?page=create" method="post">
 	<div class="form-group">
 		<label for="title">Title: </label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
