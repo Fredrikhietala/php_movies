@@ -1,6 +1,5 @@
 <?php 
 require "model/productsModel.php";
-//global $movie;
 $obj = new MoviesCrud($connection);
 $movie = new Movies($connection);
 
