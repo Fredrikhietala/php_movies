@@ -4,11 +4,12 @@ require "model/productsModel.php";
 $obj = new MoviesCrud($connection);
 $movie = new Movies($connection);
 
-$qs = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
-    if (empty($qs)) {
+$page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if (empty($page)) {
         require_once "views/start.php";
     }
-    elseif ($qs === "show") {
+    elseif ($page === "show") {
         $movie = $obj->readAll();
         require_once "views/show.php";
         if (isset($_POST['btn-delete'])) {
@@ -17,7 +18,7 @@ $qs = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
             header("Location: index.php?page=show");
         }
     }
-    elseif ($qs === "create") {
+    elseif ($page === "create") {
         require_once "views/create.php";
         if (isset($_POST['insert'])) {
             $title = $_POST['title'];
@@ -40,9 +41,34 @@ $qs = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
     }
-    elseif ($qs === "update"){
+    elseif ($page === "update") {
+        if (isset($_POST['btn-edit'])) {
+            $id = $_REQUEST['edit'];
+            $movie = $obj->getById($id);
+        }
         require_once "views/update.php";
+        if (isset($_POST['btn-update'])) {
+            $id = $_REQUEST['id'];
+            $title = $_POST['title'];
+            $movie->setTitle($title);
+            $altTitle = $_POST['altTitle'];
+            $movie->setAltTitle($altTitle);
+            $director = $_POST['director'];
+            $movie->setDirector($director);
+            $country = $_POST['country'];
+            $movie->setCountry($country);
+            $year = $_POST['year'];
+            $movie->setYear($year);
 
+            if ($movies = $obj->update($id, $title, $altTitle, $director, $country, $year)) {
+                echo "<p>Record was successfully updated</p>";
+                header("Location: index.php?page=show");
+            }
+            else {
+                echo "Error";
+                header("Location: index.php?page=update");
+            }
+        }
     }
     else
         require_once "views/start.php";
