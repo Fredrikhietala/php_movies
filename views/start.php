@@ -9,6 +9,7 @@ require "header.php";
 ?>
 <h1>Welcome</h1>
 <p>Welcome to my movie-database, here you can see a list of my favorite movies.</p>
+<img class="img-responsive" src="http://oldclassicmovies.net/wp-content/uploads/2010/02/Classic-Movie-Stars.jpg">
 
 <?php
 require "footer.php";
