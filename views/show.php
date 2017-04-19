@@ -9,6 +9,7 @@ require "header.php";
 		<th>Director</th>
 		<th>Country</th>
 		<th>Year</th>
+        <th>Actions</th>
 	</tr>
 	<?php 
 	foreach ($movie as $row):
@@ -37,5 +38,5 @@ require "header.php";
 
 
 <?php
-//require "footer.php";
+require "footer.php";
 ?>
