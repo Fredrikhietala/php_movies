@@ -12,7 +12,7 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
         $movie = $obj->readAll();
         require_once "views/show.php";
         if (isset($_POST['btn-delete'])) {
-            $id = $_REQUEST['delete'];
+            $id = $_POST['delete'];
             $movie = $obj->delete($id);
             header("Location: index.php?page=show");
         }
@@ -42,12 +42,12 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
     }
     elseif ($page === "update") {
         if (isset($_POST['btn-edit'])) {
-            $id = $_REQUEST['edit'];
+            $id = $_POST['edit'];
             $movie = $obj->getById($id);
         }
         require_once "views/update.php";
         if (isset($_POST['btn-update'])) {
-            $id = $_REQUEST['id'];
+            $id = $_POST['id'];
             $title = $_POST['title'];
             $movie->setTitle($title);
             $altTitle = $_POST['altTitle'];
