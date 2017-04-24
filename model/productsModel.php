@@ -2,7 +2,6 @@
 require "movies.php";
 
 $movie = new Movies($connection);
-global $movie;
 
 class MoviesCrud {
 	private $db;
