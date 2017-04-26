@@ -1,7 +1,10 @@
-<?php 
-require "model/productsModel.php";
+<?php
+require "model/dbConnect.php";
+require "model/movieModel.php";
+require "model/Movie.php";
+
 $obj = new MoviesCrud($connection);
-$movie = new Movies($connection);
+$movie = new Movie($connection);
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
 
