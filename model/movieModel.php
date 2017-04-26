@@ -1,7 +1,4 @@
 <?php
-require "movies.php";
-
-$movie = new Movies($connection);
 
 class MoviesCrud {
 	private $db;
