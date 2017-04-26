@@ -1,6 +1,7 @@
 /model/dbConnect.php
 .idea
 .phpintel
+composer.json
 
 composer.phar
 /vendor/
