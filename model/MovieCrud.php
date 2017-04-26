@@ -24,32 +24,29 @@ class MovieCrud {
 		return $stm->fetch();
 	}
 
-	public function update($id, $title, $altTitle, $director, $country, $year) {
+	public function update(Movie $movie) {
         $sql = 'UPDATE `films` SET `title`=:title, `altTitle`=:altTitle, `director`=:director, `country`=:country, `year`=:year WHERE `id`=:id';
         $stm = $this->db->prepare($sql);
-        $stm->bindparam(":id", $id);
-        $stm->bindparam(":title", $title);
-        $stm->bindparam(":altTitle", $altTitle);
-        $stm->bindparam(":director", $director);
-        $stm->bindparam(":country", $country);
-        $stm->bindparam(":year", $year);
-        if (!empty($movies = $stm->execute())) {
-            return $movies;
-        }
-        else
-            return false; //@TODO
+        $stm->bindparam(":id", $movie->getId());
+        $stm->bindparam(":title", $movie->getTitle());
+        $stm->bindparam(":altTitle", $movie->getAltTitle());
+        $stm->bindparam(":director", $movie->getDirector());
+        $stm->bindparam(":country", $movie->getCountry());
+        $stm->bindparam(":year", $movie->getYear());
+        return $stm->execute();
     }
 
-    public function create($title, $altTitle, $director, $country, $year) {
+    public function create(Movie $movie) {
 		$sql = 'INSERT INTO `films` (`title`, `altTitle`, `director`, `country`, `year`) VALUES (:title, :altTitle, :director, :country, :year)';
 		$stm = $this->db->prepare($sql);
-        $stm->bindparam(":title", $title);
-		$stm->bindparam(":altTitle",$altTitle);
-		$stm->bindparam(":director",$director);
-		$stm->bindparam(":country",$country);
-		$stm->bindparam(":year",$year);
-		if (!empty($movies=$stm->execute())) {
-            return $movies;
+        $stm->bindparam(":title", $movie->getTitle());
+		$stm->bindparam(":altTitle",$movie->getAltTitle());
+		$stm->bindparam(":director",$movie->getDirector());
+		$stm->bindparam(":country",$movie->getCountry());
+		$stm->bindparam(":year",$movie->getYear());
+		if ($stm->execute()) {
+		    $movie->setId($this->db->lastInsertId());
+            return $movie;
         }
         else
 		    return false; //@TODO
