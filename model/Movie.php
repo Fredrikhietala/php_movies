@@ -1,7 +1,6 @@
 <?php
-require "dbconnect.php";
 
-class Movies {
+class Movie {
 
 	private $id;
 	private $title;
