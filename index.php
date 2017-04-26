@@ -3,25 +3,22 @@ require "model/dbConnect.php";
 require "model/movieCrud.php";
 require "model/Movie.php";
 
-$obj = new MovieCrud($connection);
+$movieCrud = new MovieCrud($connection);
 $movie = new Movie($connection);
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    if (empty($page)) {
-        require_once "views/start.php";
-    }
-    elseif ($page === "show") {
-        $movie = $obj->readAll();
+switch ($page) {
+    case 'show':
+        $movie = $movieCrud->readAll();
         require_once "views/show.php";
-        if (isset($_POST['btn-delete'])) {
+        if (isset($_POST['btn-delete'])){
             $id = $_POST['delete'];
-            $movie = $obj->delete($id);
-            header("Location: index.php?page=show");
+            $movie = $movieCrud->delete($id);
         }
-    }
-    elseif ($page === "create") {
-        require_once "views/create.php";
+    break;
+
+    case 'create':
         if (isset($_POST['insert'])) {
             $title = $_POST['title'];
             $movie->setTitle($title);
@@ -33,22 +30,23 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
             $movie->setCountry($country);
             $year = $_POST['year'];
             $movie->setYear($year);
+            require_once "views/create.php";
 
-            if ($movies = $obj->create($title, $altTitle, $director, $country, $year)) {
+            if ($movies = $movieCrud->create($title, $altTitle, $director, $country, $year)) {
                 echo "<div class='alert alert-success'>Movie was inserted</div>";
-                header("Location: index.php?page=show");
+                //header("Location: index.php?page=show");
             } else {
                 echo "<div class='alert alert-danger'>Unable to insert movie</div>";
-                header("Location: index.php?page=create");
+                //header("Location: index.php?page=create");
             }
         }
-    }
-    elseif ($page === "update") {
+    break;
+
+    case 'update':
         if (isset($_POST['btn-edit'])) {
             $id = $_POST['edit'];
-            $movie = $obj->getById($id);
+            $movie = $movieCrud->getById($id);
         }
-        require_once "views/update.php";
         if (isset($_POST['btn-update'])) {
             $id = $_POST['id'];
             $title = $_POST['title'];
@@ -61,17 +59,19 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
             $movie->setCountry($country);
             $year = $_POST['year'];
             $movie->setYear($year);
+            require_once "views/update.php";
 
-            if ($movies = $obj->update($id, $title, $altTitle, $director, $country, $year)) {
-                echo "<p>Record was successfully updated</p>";
-                header("Location: index.php?page=show");
+            if ($movies = $movieCrud->update($id, $title, $altTitle, $director, $country, $year)) {
+                echo "<p>Movie was successfully updated</p>";
+                //header("Location: index.php?page=show");
             }
             else {
-                echo "Error";
-                header("Location: index.php?page=update");
+                echo "<div class='alert alert-danger'>Unable to update movie</div>";
+                //header("Location: index.php?page=update");
             }
         }
-    }
-    else
+    break;
+    default :
         require_once "views/start.php";
-
+    break;
+}
