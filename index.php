@@ -1,9 +1,9 @@
 <?php
 require "model/dbConnect.php";
-require "model/movieModel.php";
+require "model/movieCrud.php";
 require "model/Movie.php";
 
-$obj = new MoviesCrud($connection);
+$obj = new MovieCrud($connection);
 $movie = new Movie($connection);
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);

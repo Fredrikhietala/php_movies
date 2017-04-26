@@ -1,6 +1,6 @@
 <?php
 
-class MoviesCrud {
+class MovieCrud {
 	private $db;
 
 	public function __construct($connection) {
