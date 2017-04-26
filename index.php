@@ -1,6 +1,6 @@
 <?php
 require "model/dbConnect.php";
-require "model/movieCrud.php";
+require "model/MovieCrud.php";
 require "model/Movie.php";
 
 $movieCrud = new MovieCrud($connection);
@@ -10,11 +10,13 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
 
 switch ($page) {
     case 'show':
-        $movie = $movieCrud->readAll();
-        require_once "views/show.php";
         if (isset($_POST['btn-delete'])){
             $id = $_POST['delete'];
             $movie = $movieCrud->delete($id);
+        }
+        else {
+            $movie = $movieCrud->readAll();
+            require_once "views/show.php";
         }
     break;
 
