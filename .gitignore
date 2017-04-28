@@ -1,4 +1,4 @@
-resources/config.php
+/resources/config.php
 .idea
 .phpintel
 composer.json

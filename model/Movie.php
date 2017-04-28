@@ -9,17 +9,16 @@ class Movie {
 	private $country;
 	private $year;
 
-	public function __construct($data = null) {
+	public function __construct($data = []) {
 
-		if(is_array($data)){
-			if (isset($data['id'])) $this->id = $data['id'];
-
-			$this->title = $data['title'];
-			$this->altTitle = $data['altTitle'];
-			$this->director = $data['director'];
-			$this->country = $data['country'];
-			$this->year = $data['year'];
-		}
+        if (isset($data['id'])) {
+            $this->id = $data['id'];
+            $this->title = $data['title'];
+            $this->altTitle = $data['altTitle'];
+            $this->director = $data['director'];
+            $this->country = $data['country'];
+            $this->year = $data['year'];
+        }
 	}
 
 	public function getId() {

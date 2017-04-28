@@ -1,7 +1,9 @@
 <?php
-require "model/dbConnect.php";
+require "resources/Database.php";
 require "model/MovieCrud.php";
 require "model/Movie.php";
+$config = require "resources/config.php";
+$db = new Database($config);
 
 $movieCrud = new MovieCrud($connection);
 $movie = new Movie($connection);
