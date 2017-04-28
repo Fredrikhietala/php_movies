@@ -1,4 +1,4 @@
-/model/dbConnect.php
+/resources/config.php
 .idea
 .phpintel
 composer.json
