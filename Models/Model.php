@@ -3,8 +3,8 @@
 class MovieCrud {
 	private $db;
 
-	public function __construct(PDO $connection) {
-		$this->db = $connection;
+	public function __construct(PDO $pdo) {
+		$this->db = $pdo;
 	}
 
     public function readAll() {
