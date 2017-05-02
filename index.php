@@ -1,81 +1,44 @@
 <?php
-require "resources/Database.php";
-require "model/MovieCrud.php";
-require "model/Movie.php";
-$config = require "resources/config.php";
-$db = new Database($config);
+//require "resources/Database.php";
+use Controllers\Controller;
+use Models\Movie;
+use Models\Model;
 
-$movieCrud = new MovieCrud($connection);
-$movie = new Movie($connection);
+$baseDir = __DIR__ . '/..';
 
-$page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+$config = require $baseDir . '/resources/config.php';
 
-switch ($page) {
-    case 'show':
-        if (isset($_POST['btn-delete'])){
-            $id = $_POST['delete'];
-            $movie = $movieCrud->delete($id);
-        }
-        else {
-            $movie = $movieCrud->readAll();
-            require_once "views/show.php";
-        }
-    break;
+$path = function ($uri) {
+    return ($uri == "/") ? $uri : rtrim($uri, '/');
+};
 
-    case 'create':
-        if (isset($_POST['insert'])) {
-            $title = $_POST['title'];
-            $movie->setTitle($title);
-            $altTitle = $_POST['altTitle'];
-            $movie->setAltTitle($altTitle);
-            $director = $_POST['director'];
-            $movie->setDirector($director);
-            $country = $_POST['country'];
-            $movie->setCountry($country);
-            $year = $_POST['year'];
-            $movie->setYear($year);
-            require_once "views/create.php";
+$dsn = "mysql:host=".$config['db_host'].";dbname=".$config['db_name'].";charset=".$config['charset'];
+$pdo = new PDO($dsn, $config['db_user'], $config['db_password'], $config['options']);
+$model = new Model($pdo);
 
-            if ($movies = $movieCrud->create($title, $altTitle, $director, $country, $year)) {
-                echo "<div class='alert alert-success'>Movie was inserted</div>";
-                //header("Location: index.php?page=show");
-            } else {
-                echo "<div class='alert alert-danger'>Unable to insert movie</div>";
-                //header("Location: index.php?page=create");
-            }
-        }
-    break;
+$controller = new Controller($baseDir);
+$url = $path($_SERVER['REQUEST_URI']);
 
-    case 'update':
-        if (isset($_POST['btn-edit'])) {
-            $id = $_POST['edit'];
-            $movie = $movieCrud->getById($id);
-        }
-        if (isset($_POST['btn-update'])) {
-            $id = $_POST['id'];
-            $title = $_POST['title'];
-            $movie->setTitle($title);
-            $altTitle = $_POST['altTitle'];
-            $movie->setAltTitle($altTitle);
-            $director = $_POST['director'];
-            $movie->setDirector($director);
-            $country = $_POST['country'];
-            $movie->setCountry($country);
-            $year = $_POST['year'];
-            $movie->setYear($year);
-            require_once "views/update.php";
+    switch ($url) {
+        case '/show':
+            $controller->readAllAlbums($model);
+            $controller->deleteMovie($_POST['delete']);
+            require $baseDir. '/views/show.php';
+            break;
 
-            if ($movies = $movieCrud->update($id, $title, $altTitle, $director, $country, $year)) {
-                echo "<p>Movie was successfully updated</p>";
-                //header("Location: index.php?page=show");
-            }
-            else {
-                echo "<div class='alert alert-danger'>Unable to update movie</div>";
-                //header("Location: index.php?page=update");
-            }
-        }
-    break;
-    default :
-        require_once "views/start.php";
-    break;
+        case 'create':
+            $movie = new Movie($movie_data = []);
+            $controller->createMovie($movie);
+            require "views/create.php";
+            break;
+
+        case 'update':
+            $this->controller->getById($_POST['edit']);
+            $this->controller->updateMovie($movie);
+            require "views/update.php";
+            break;
+        default:
+            require "views/start.php";
+            break;
 }
+
