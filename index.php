@@ -1,12 +1,17 @@
 <?php
 //require "resources/Database.php";
-use Controllers\Controller;
-use Models\Movie;
-use Models\Model;
+//use Controllers\Controller;
+//use Models\Movie;
+//use Models\Model;
+require "Controllers/Controller.php";
+require "Models/Model.php";
+require "Models/Movie.php";
 
-$baseDir = __DIR__ . '/..';
+//$baseDir = __DIR__ . '/..';
 
-$config = require $baseDir . '/resources/config.php';
+//require $baseDir . '/vendor/autoload.php';
+
+$config = require "resources/config.php";
 
 $path = function ($uri) {
     return ($uri == "/") ? $uri : rtrim($uri, '/');
@@ -16,25 +21,26 @@ $dsn = "mysql:host=".$config['db_host'].";dbname=".$config['db_name'].";charset=
 $pdo = new PDO($dsn, $config['db_user'], $config['db_password'], $config['options']);
 $model = new Model($pdo);
 
-$controller = new Controller($baseDir);
+$controller = new Controller($pdo);
 $url = $path($_SERVER['REQUEST_URI']);
 
     switch ($url) {
-        case '/show':
-            $controller->readAllAlbums($model);
+        case 'show':
+            $controller->readAllAlbums();
             $controller->deleteMovie($_POST['delete']);
-            require $baseDir. '/views/show.php';
+            require "views/show.php";
             break;
 
         case 'create':
-            $movie = new Movie($movie_data = []);
+            $movie = new Movie();
             $controller->createMovie($movie);
             require "views/create.php";
             break;
 
         case 'update':
-            $this->controller->getById($_POST['edit']);
-            $this->controller->updateMovie($movie);
+            $id = $_POST['edit'];
+            $controller->getById($id);
+            $controller->updateMovie($movie);
             require "views/update.php";
             break;
         default:
