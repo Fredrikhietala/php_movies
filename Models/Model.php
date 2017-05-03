@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+//namespace Models;
 
-use PDO;
+//use PDO;
 
 class Model {
 	private $pdo;
