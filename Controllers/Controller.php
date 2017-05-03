@@ -1,22 +1,23 @@
 <?php
 
-namespace Controllers;
+//namespace Controllers;
 
 Class Controller {
-    private $basedir;
+    //private $basedir;
+    private $model;
 
-    public function __construct($basedir = '') {
-        $this->basedir = $basedir;
+    public function __construct(PDO $pdo) {
+        $this->model = new Model($pdo);
     }
 
     public function index() {
-        require $this->basedir.'/views/start.php';
+        require "../views/start.php";
     }
 
     /**
      * @return string
      */
-    public function getBasedir()
+    /*public function getBasedir()
     {
         return $this->basedir;
     }
@@ -24,51 +25,40 @@ Class Controller {
     /**
      * @param string $basedir
      */
-    public function setBasedir($basedir)
+    /*public function setBasedir($basedir)
     {
         $this->basedir = $basedir;
-    }
+    }*/
 
-    public function readAllAlbums($model) {
-        return $model->readAll();
+    public function readAllAlbums() {
+        return $this->model->readAll();
     }
-    public function getById($model, $id) {
+    public function getById($id) {
         if (isset($_POST['btn-edit'])) {
             $id = $_POST['edit'];
         }
-        return $model->getById($id);
+        return $this->model->getById($id);
     }
-    public function updateMovie($model $data) {
+    public function updateMovie($movie) {
         if (isset($_POST['btn-update'])) {
-            $id = $_POST['id'];
-            $this->data->setId($id);
-            $title = $_POST['title'];
-            $this->movie->setTitle($title);
-            $altTitle = $_POST['altTitle'];
-            $this->movie->setAltTitle($altTitle);
-            $director = $_POST['director'];
-            $this->movie->setDirector($director);
-            $country = $_POST['country'];
-            $this->movie->setCountry($country);
-            $year = $_POST['year'];
-            $this->movie->setYear($year);
-            $movie = [$id, $title, $altTitle, $director, $year];
+            $movie = new Movie();
+            $movie->setId($_POST['id']);
+            $movie->setTitle($_POST['title']);
+            $movie->setAltTitle($_POST['altTitle']);
+            $movie->setDirector($_POST['director']);
+            $movie->setCountry($_POST['country']);
+            $movie->setYear($_POST['year']);
         }
-        return $this->model->create($movie);
+        return $this->model->update($movie);
     }
-    public function createMovie (Movie $movie) {
+    public function createMovie ($movie) {
         if (isset($_POST['insert'])) {
-            $title = $_POST['title'];
-            $this->movie->setTitle($title);
-            $altTitle = $_POST['altTitle'];
-            $this->movie->setAltTitle($altTitle);
-            $director = $_POST['director'];
-            $this->movie->setDirector($director);
-            $country = $_POST['country'];
-            $this->movie->setCountry($country);
-            $year = $_POST['year'];
-            $this->movie->setYear($year);
-            $movie = [$title, $altTitle, $director, $year];
+            $movie = new Movie();
+            $movie->setTitle($_POST['title']);
+            $movie->setAltTitle($_POST['altTitle']);
+            $movie->setDirector($_POST['director']);
+            $movie->setCountry($_POST['country']);
+            $movie->setYear($_POST['year']);
         }
         return $this->model->create($movie);
     }
