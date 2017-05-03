@@ -15,7 +15,7 @@ class Model {
 		$sql = 'SELECT * FROM `films`';
 		$stm = $this->pdo->prepare($sql);
 		$stm->execute();
-		$stm->setFetchMode(PDO::FETCH_CLASS, 'Movies');
+		$stm->setFetchMode(PDO::FETCH_ASSOC);
 		return $stm->fetchAll();
 	}
 
@@ -24,7 +24,7 @@ class Model {
 		$stm = $this->pdo->prepare($sql);
 		$stm->bindparam(":id", $id);
 		$stm->execute();
-		$stm->setFetchMode(PDO::FETCH_CLASS, 'Movies');
+		$stm->setFetchMode(PDO::FETCH_ASSOC);
 		return $stm->fetch();
 	}
 
@@ -61,7 +61,7 @@ class Model {
 	    $stm = $this->pdo->prepare($sql);
 	    $stm->bindparam(":id", $id);
 	    $stm->execute();
-	    $stm->setFetchMode(PDO::FETCH_CLASS, 'Movies');
+	    $stm->setFetchMode(PDO::FETCH_ASSOC);
 	    return $stm->fetch();
     }
 }
