@@ -1,4 +1,5 @@
 <?php
+/* @var Controller $this */
 require "header.php";
 ?>
 <h2>Filmer</h2>
@@ -12,7 +13,8 @@ require "header.php";
         <th>Actions</th>
 	</tr>
 	<?php 
-	foreach ($movie as $row):
+	foreach ($this->readAllMovies() as $row):
+        /* @var Movie $row */
 	?>
 	<tr>
 		<td><?php echo $row->getTitle(); ?></td>
