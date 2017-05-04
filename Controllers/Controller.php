@@ -1,9 +1,6 @@
 <?php
 
-//namespace Controllers;
-
 Class Controller {
-    //private $basedir;
     private $model;
 
     public function __construct(PDO $pdo) {
@@ -11,61 +8,73 @@ Class Controller {
     }
 
     public function index() {
-        require "../views/start.php";
+
+        $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        switch ($page) {
+            case ($page === "show"):
+                if (isset($_POST['btn-delete'])) {
+                    $id = $_POST['delete'];
+                    $this->deleteMovie($id);
+                }
+                if (isset($_POST['btn-edit'])) {
+                    $id = $_POST['edit'];
+                    $this->getById($id);
+                }
+                require "views/show.php";
+                break;
+
+            case ($page === "create"):
+                if (isset($_POST['insert'])) {
+                    $movie = new Movie();
+                    $movie->setTitle($_POST['title']);
+                    $movie->setAltTitle($_POST['altTitle']);
+                    $movie->setDirector($_POST['director']);
+                    $movie->setCountry($_POST['country']);
+                    $movie->setYear($_POST['year']);
+                    $success = $this->createMovie($movie);
+                    header('Location: views/start.php?success=' . (int)$success . '&id=' . $movie->getId());
+                    exit();
+                }
+                require "views/create.php";
+                break;
+
+            case ($page === "update"):
+                if (isset($_POST['btn-update'])) {
+                    $movie = new Movie();
+                    $movie->setId($_POST['id']);
+                    $movie->setTitle($_POST['title']);
+                    $movie->setAltTitle($_POST['altTitle']);
+                    $movie->setDirector($_POST['director']);
+                    $movie->setCountry($_POST['country']);
+                    $movie->setYear($_POST['year']);
+                    $this->updateMovie($movie);
+                }
+                require "views/update.php";
+                break;
+            default:
+                require "views/start.php";
+                break;
+        }
     }
 
-    /**
-     * @return string
-     */
-    /*public function getBasedir()
-    {
-        return $this->basedir;
-    }
-
-    /**
-     * @param string $basedir
-     */
-    /*public function setBasedir($basedir)
-    {
-        $this->basedir = $basedir;
-    }*/
-
-    public function readAllAlbums() {
+    public function readAllMovies() {
         return $this->model->readAll();
     }
     public function getById($id) {
-        if (isset($_POST['btn-edit'])) {
-            $id = $_POST['edit'];
-        }
+
         return $this->model->getById($id);
     }
     public function updateMovie($movie) {
-        if (isset($_POST['btn-update'])) {
-            $movie = new Movie();
-            $movie->setId($_POST['id']);
-            $movie->setTitle($_POST['title']);
-            $movie->setAltTitle($_POST['altTitle']);
-            $movie->setDirector($_POST['director']);
-            $movie->setCountry($_POST['country']);
-            $movie->setYear($_POST['year']);
-        }
+
         return $this->model->update($movie);
     }
     public function createMovie ($movie) {
-        if (isset($_POST['insert'])) {
-            $movie = new Movie();
-            $movie->setTitle($_POST['title']);
-            $movie->setAltTitle($_POST['altTitle']);
-            $movie->setDirector($_POST['director']);
-            $movie->setCountry($_POST['country']);
-            $movie->setYear($_POST['year']);
-        }
+
         return $this->model->create($movie);
     }
     public function deleteMovie ($id) {
-        if (isset($_POST['btn-delete'])) {
-            $id = $_POST['delete'];
-        }
+
         return $this->model->delete($id);
     }
 }
