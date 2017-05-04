@@ -1,7 +1,5 @@
 <?php
 
-//namespace Models;
-
 class Movie {
 
 	private $id;
@@ -15,11 +13,11 @@ class Movie {
 
         if (isset($movie_data['id'])) {
             $this->id = $movie_data['id'];
-            $this->title = $movie_data['title'];
-            $this->altTitle = $movie_data['altTitle'];
-            $this->director = $movie_data['director'];
-            $this->country = $movie_data['country'];
-            $this->year = $movie_data['year'];
+            $this->title = @$movie_data['title'];
+            $this->altTitle = @$movie_data['altTitle'];
+            $this->director = @$movie_data['director'];
+            $this->country = @$movie_data['country'];
+            $this->year = @$movie_data['year'];
         }
 	}
 
