@@ -1,9 +1,5 @@
 <?php
 
-//namespace Models;
-
-//use PDO;
-
 class Model {
 	private $pdo;
 
@@ -15,8 +11,10 @@ class Model {
 		$sql = 'SELECT * FROM `films`';
 		$stm = $this->pdo->prepare($sql);
 		$stm->execute();
-		$stm->setFetchMode(PDO::FETCH_ASSOC);
-		return $stm->fetchAll();
+		$results = $stm->fetchAll(PDO::FETCH_ASSOC);
+		return array_map(function ($item) {
+		    return new Movie($item);
+        }, $results);
 	}
 
 	public function getById($id) {
@@ -24,8 +22,7 @@ class Model {
 		$stm = $this->pdo->prepare($sql);
 		$stm->bindparam(":id", $id);
 		$stm->execute();
-		$stm->setFetchMode(PDO::FETCH_ASSOC);
-		return $stm->fetch();
+		return $stm->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function update(Movie $movie) {
@@ -48,12 +45,11 @@ class Model {
 		$stm->bindparam(":director",$movie->getDirector());
 		$stm->bindparam(":country",$movie->getCountry());
 		$stm->bindparam(":year",$movie->getYear());
-		if ($stm->execute()) {
-		    $movie->setId($this->pdo->lastInsertId());
-            return $movie;
+		$success = $stm->execute();
+		if ($success) {
+            $movie->setId($this->pdo->lastInsertId());
         }
-        else
-		    return false; //@TODO
+		    return $success;
 	}
 
 	public function delete($id) {
