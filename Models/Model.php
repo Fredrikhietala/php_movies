@@ -22,7 +22,7 @@ class Model {
 		$stm = $this->pdo->prepare($sql);
 		$stm->bindparam(":id", $id);
 		$stm->execute();
-		return $stm->fetch(PDO::FETCH_ASSOC);
+		return new Movie ($stm->fetch(PDO::FETCH_ASSOC));
 	}
 
 	public function update(Movie $movie) {
