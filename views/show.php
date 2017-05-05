@@ -23,13 +23,10 @@ require "header.php";
 		<td><?php echo $row->getCountry(); ?></td>
 		<td><?php echo $row->getYear(); ?></td>
 		<td>
-            <form action="../index.php?page=update" method="post">
-                <input type="hidden" name="edit" value="<?php echo $row->getId(); ?>"/>
-                <button class="btn btn-default" name="btn-edit" id="edit">Update</button>
-            </form>
+            <a class="btn btn-default" href="/index.php?page=update&id=<?php echo $row->getId(); ?>">Update</a>
         </td>
 		<td>
-            <form action="../index.php?page=show" method="post">
+            <form action="/index.php?page=show" method="post">
                 <input type="hidden" name="delete" value="<?php echo $row->getId(); ?>"/>
                 <button type="submit" class="btn btn-default" name="btn-delete">Delete</button>
             </form>
