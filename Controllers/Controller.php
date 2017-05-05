@@ -17,10 +17,6 @@ Class Controller {
                     $id = $_POST['delete'];
                     $this->deleteMovie($id);
                 }
-                if (isset($_POST['btn-edit'])) {
-                    $id = $_POST['edit'];
-                    $this->getById($id);
-                }
                 require "views/show.php";
                 break;
 
@@ -40,15 +36,21 @@ Class Controller {
                 break;
 
             case ($page === "update"):
-                if (isset($_POST['btn-update'])) {
-                    $movie = new Movie();
-                    $movie->setId($_POST['id']);
-                    $movie->setTitle($_POST['title']);
-                    $movie->setAltTitle($_POST['altTitle']);
-                    $movie->setDirector($_POST['director']);
-                    $movie->setCountry($_POST['country']);
-                    $movie->setYear($_POST['year']);
-                    $this->updateMovie($movie);
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $movie = $this->getByMovieId($id);
+                    if (isset($_POST['btn-update'])) {
+                        $movie = new Movie();
+                        $movie->getId();
+                        $movie->setTitle($_POST['title']);
+                        $movie->setAltTitle($_POST['altTitle']);
+                        $movie->setDirector($_POST['director']);
+                        $movie->setCountry($_POST['country']);
+                        $movie->setYear($_POST['year']);
+                        $success=$this->updateMovie($movie);
+                        header('Location: views/start.php?success=' . (int)$success . '&id=' . $movie->getId());
+                        exit();
+                    }
                 }
                 require "views/update.php";
                 break;
@@ -61,7 +63,7 @@ Class Controller {
     public function readAllMovies() {
         return $this->model->readAll();
     }
-    public function getById($id) {
+    public function getByMovieId($id) {
 
         return $this->model->getById($id);
     }
