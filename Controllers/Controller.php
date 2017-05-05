@@ -13,11 +13,9 @@ Class Controller {
 
         switch ($page) {
             case ($page === "show"):
-                if (isset($_POST['btn-delete'])) {
-                    $id = $_POST['delete'];
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
                     $delete_success = $this->deleteMovie($id);
-                    header('Location: /index.php?page=start&delete_success=' . (int)$delete_success);
-                    exit();
                 }
                 require "views/show.php";
                 break;

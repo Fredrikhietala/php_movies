@@ -26,10 +26,7 @@ require "header.php";
             <a class="btn btn-default" href="/index.php?page=update&id=<?php echo $row->getId(); ?>">Update</a>
         </td>
 		<td>
-            <form action="/index.php?page=show" method="post">
-                <input type="hidden" name="delete" value="<?php echo $row->getId(); ?>"/>
-                <button type="submit" class="btn btn-default" name="btn-delete">Delete</button>
-            </form>
+            <a class="btn btn-default" href="/index.php?page=show&id=<?php echo $row->getId(); ?>">Delete</a>
         </td>
 	</tr>
 	<?php endforeach ?>
