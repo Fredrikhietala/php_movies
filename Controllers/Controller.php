@@ -15,7 +15,9 @@ Class Controller {
             case ($page === "show"):
                 if (isset($_POST['btn-delete'])) {
                     $id = $_POST['delete'];
-                    $this->deleteMovie($id);
+                    $delete_success = $this->deleteMovie($id);
+                    header('Location: /index.php?page=start&delete_success=' . (int)$delete_success);
+                    exit();
                 }
                 require "views/show.php";
                 break;
@@ -29,7 +31,7 @@ Class Controller {
                     $movie->setCountry($_POST['country']);
                     $movie->setYear($_POST['year']);
                     $success = $this->createMovie($movie);
-                    header('Location: views/start.php?success=' . (int)$success . '&id=' . $movie->getId());
+                    header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $movie->getId());
                     exit();
                 }
                 require "views/create.php";
@@ -39,20 +41,20 @@ Class Controller {
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $movie = $this->getByMovieId($id);
-                    if (isset($_POST['btn-update'])) {
-                        $movie = new Movie();
-                        $movie->getId();
-                        $movie->setTitle($_POST['title']);
-                        $movie->setAltTitle($_POST['altTitle']);
-                        $movie->setDirector($_POST['director']);
-                        $movie->setCountry($_POST['country']);
-                        $movie->setYear($_POST['year']);
-                        $success=$this->updateMovie($movie);
-                        header('Location: views/start.php?success=' . (int)$success . '&id=' . $movie->getId());
-                        exit();
-                    }
+                    require "views/update.php";
                 }
-                require "views/update.php";
+                if (isset($_POST['btn-update'])) {
+                    $movie = new Movie();
+                    $movie->setId($_POST['id']);
+                    $movie->setTitle($_POST['title']);
+                    $movie->setAltTitle($_POST['altTitle']);
+                    $movie->setDirector($_POST['director']);
+                    $movie->setCountry($_POST['country']);
+                    $movie->setYear($_POST['year']);
+                    $update_success = $this->updateMovie($movie);
+                    header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $movie->getId());
+                    exit();
+                }
                 break;
             default:
                 require "views/start.php";
