@@ -14,6 +14,14 @@ require "header.php";
         <p>Your movie was successfully deleted!</p>
     <?php endif; ?>
 
+    <?php if (isset($_GET['update_success']) && $_GET['update_success']): ?>
+        <p>Your movie was successfully updated! If you want to see your movie click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['update_success']) && !$_GET['update_success']): ?>
+        <p>Something went wrong!</p>
+    <?php endif; ?>
+
 <h1>Welcome</h1>
 <p>Welcome to my movie-database, here you can see a list of my favorite movies.</p>
 <img class="img-responsive" src="http://oldclassicmovies.net/wp-content/uploads/2010/02/Classic-Movie-Stars.jpg">
