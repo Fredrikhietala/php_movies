@@ -1,12 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Fredrik Hietala
- * Date: 2017-04-19
- * Time: 09:38
- */
 require "header.php";
 ?>
+
+    <?php if (isset($_GET['success']) && $_GET['success']): ?>
+        <p>Your movie was successfully inserted! If you want to see your movie click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['success']) && !$_GET['success']): ?>
+        <p>Something went wrong!</p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['delete_success']) && $_GET['delete_success']): ?>
+        <p>Your movie was successfully deleted!</p>
+    <?php endif; ?>
+
 <h1>Welcome</h1>
 <p>Welcome to my movie-database, here you can see a list of my favorite movies.</p>
 <img class="img-responsive" src="http://oldclassicmovies.net/wp-content/uploads/2010/02/Classic-Movie-Stars.jpg">
