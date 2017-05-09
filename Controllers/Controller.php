@@ -15,7 +15,7 @@ Class Controller {
             case ($page === "show"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $delete_success = $this->deleteMovie($id);
+                    $this->deleteMovie($id);
                 }
                 require "views/show.php";
                 break;
