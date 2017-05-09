@@ -1,5 +1,4 @@
 <?php
-/* @var Controller $this */
 /* @var Movie $movie */
 require "header.php";
 ?>

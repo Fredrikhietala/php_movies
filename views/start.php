@@ -10,10 +10,6 @@ require "header.php";
         <p>Something went wrong!</p>
     <?php endif; ?>
 
-    <?php if (isset($_GET['delete_success']) && $_GET['delete_success']): ?>
-        <p>Your movie was successfully deleted!</p>
-    <?php endif; ?>
-
     <?php if (isset($_GET['update_success']) && $_GET['update_success']): ?>
         <p>Your movie was successfully updated! If you want to see your movie click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
     <?php endif; ?>

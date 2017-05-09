@@ -2,7 +2,7 @@
 require "header.php";
 ?>
 
-<form action="../index.php?page=create" method="post">
+<form action="/index.php?page=create" method="post">
 	<div class="form-group">
 		<label for="title">Title: </label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>

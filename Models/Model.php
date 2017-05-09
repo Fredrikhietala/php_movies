@@ -57,7 +57,6 @@ class Model {
 	    $stm = $this->pdo->prepare($sql);
 	    $stm->bindparam(":id", $id);
 	    $stm->execute();
-	    $stm->setFetchMode(PDO::FETCH_ASSOC);
-	    return $stm->fetch();
+	    return $stm->fetch(PDO::FETCH_ASSOC);
     }
 }
