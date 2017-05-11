@@ -16,6 +16,6 @@ body {
     height: 60px;
     background-color: #f5f5f5;
 }
-td {
+td, th {
 	padding-right: 5px;
 }

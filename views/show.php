@@ -11,6 +11,7 @@ require "header.php";
 		<th>Country</th>
 		<th>Year</th>
         <th>Actions</th>
+        <th></th>
 	</tr>
 	<?php 
 	foreach ($this->readAllMovies() as $row):
