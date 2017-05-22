@@ -42,13 +42,7 @@ Class Controller {
                     require "views/update.php";
                 }
                 if (isset($_POST['btn-update'])) {
-                    $movie = new Movie();
-                    $movie->setId($_POST['id']);
-                    $movie->setTitle($_POST['title']);
-                    $movie->setAltTitle($_POST['altTitle']);
-                    $movie->setDirector($_POST['director']);
-                    $movie->setCountry($_POST['country']);
-                    $movie->setYear($_POST['year']);
+                    $movie = new Movie($_POST);
                     $update_success = $this->updateMovie($movie);
                     header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $movie->getId());
                     exit();
