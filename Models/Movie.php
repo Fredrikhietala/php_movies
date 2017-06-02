@@ -14,7 +14,7 @@ class Movie {
         if (isset($movie_data['id'])) {
             $this->id = $movie_data['id'];
             $this->title = @$movie_data['title'];
-            $this->altTitle = @$movie_data['altTitle'];
+            $this->altTitle = @$movie_data['alt_title'];
             $this->director = @$movie_data['director'];
             $this->country = @$movie_data['country'];
             $this->year = @$movie_data['year'];

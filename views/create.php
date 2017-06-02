@@ -9,7 +9,7 @@ require "header.php";
 	</div>
 	<div class="form-group">
 		<label for="altTitle">Alternative title: </label>
-		<input type="text" name="altTitle" class="form-control" id="altTitle" placeholder="Alternative title">
+		<input type="text" name="alt_title" class="form-control" id="altTitle" placeholder="Alternative title">
 	</div>
 	<div class="form-group">
 		<label for="director">Director: </label>
