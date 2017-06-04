@@ -17,7 +17,7 @@ require "header.php";
 	</div>
 	<div class="form-group">
 		<label for="director">Director: </label>
-		<input type="text" name="director" class="form-control" id="director" value="<?php echo $movie->getDirector(); ?>" required>
+		<input type="text" name="director_id" class="form-control" id="directorId" value="<?php echo $movie->getDirectorId(); ?>" required>
 	</div>
 	<div class="form-group">
 		<label for="country">Country: </label>
