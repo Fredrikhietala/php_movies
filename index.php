@@ -2,6 +2,7 @@
 require "Controllers/Controller.php";
 require "Models/Model.php";
 require "Models/Movie.php";
+require "Models/Director.php";
 
 $config = require "resources/config.php";
 
@@ -10,4 +11,3 @@ $pdo = new PDO($dsn, $config['db_user'], $config['db_password'], $config['db_opt
 
 $controller = new Controller($pdo);
 $controller->index();
-
