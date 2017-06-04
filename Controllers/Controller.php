@@ -26,9 +26,9 @@ Class Controller {
             case ($page === "create_movie"):
                 if (isset($_POST['insert'])) {
                     $movie = new Movie();
+                    $movie->setDirectorId($_POST['director']);
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['altTitle']);
-                    $movie->setDirectorId($_POST['director']);
                     $movie->setCountry($_POST['country']);
                     $movie->setYear($_POST['year']);
                     $success = $this->createMovie($movie);

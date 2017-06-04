@@ -54,7 +54,7 @@ class Model {
     }
 
     public function create(Movie $movie) {
-		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `country`, `year`) VALUES (:director, :title, :altTitle, :country, :year)';
+		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `country`, `year`) VALUES (:directorId, :title, :altTitle, :country, :year)';
 		$stm = $this->pdo->prepare($sql);
         $stm->bindValue(":directorId",$movie->getDirectorId());
 		$stm->bindValue(":title", $movie->getTitle());
