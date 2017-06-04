@@ -38,6 +38,16 @@ Class Controller {
                 require "views/create.php";
                 break;
 
+            case ($page === "create_director"):
+                if (isset($_POST['insert'])) {
+                    $director = new Director();
+                    $director->setName($_POST['name']);
+                    $director->setBirthYear($_POST['birthYear']);
+                    $success = $this->model->createDirector($director);
+                }
+                require "views/create_director.php";
+                break;
+
             case ($page === "update_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
