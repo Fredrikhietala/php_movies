@@ -4,9 +4,9 @@ class Movie
 {
 
     private $id;
+    private $directorId;
     private $title;
     private $altTitle;
-    private $directorId;
     private $country;
     private $year;
 
@@ -15,9 +15,9 @@ class Movie
 
         if (isset($movie_data['id'])) {
             $this->id = $movie_data['id'];
+            $this->directorId = @$movie_data['directorId'];
             $this->title = @$movie_data['title'];
-            $this->altTitle = @$movie_data['alt_title'];
-            $this->directorId = @$movie_data['director_id'];
+            $this->altTitle = @$movie_data['altTitle'];
             $this->country = @$movie_data['country'];
             $this->year = @$movie_data['year'];
         }
