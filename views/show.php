@@ -41,8 +41,8 @@ require "header.php";
                 <td><?php echo $movies->getCountry(); ?></td>
                 <td><?php echo $movies->getYear(); ?></td>
             </tr>
-        <?php endforeach ?>
-	<?php endforeach ?>
+        <?php endforeach; ?>
+	<?php endforeach; ?>
 
 </table>
 

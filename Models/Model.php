@@ -33,6 +33,14 @@ class Model {
 		return new Movie ($stm->fetch(PDO::FETCH_ASSOC));
 	}
 
+	public function getDirectorById($id) {
+	    $sql = 'SELECT * FROM `director` WHERE `id`=:id';
+	    $stm = $this->pdo->prepare($sql);
+        $stm->bindValue(":id", $id);
+        $stm->execute();
+        return new Director($stm->fetch(PDO::FETCH_ASSOC));
+    }
+
 	public function update(Movie $movie) {
         $sql = 'UPDATE `films` SET `title`=:title, `altTitle`=:altTitle, `director`=:director, `country`=:country, `year`=:year WHERE `id`=:id';
         $stm = $this->pdo->prepare($sql);
