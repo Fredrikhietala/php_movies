@@ -5,32 +5,45 @@ require "header.php";
 <h2>Filmer</h2>
 <table class="table-striped">
 	<tr>
-		<th>Title</th>
-		<th>Alternative title</th>
-		<th>Director</th>
-		<th>Country</th>
-		<th>Year</th>
+		<th>Name</th>
+		<th>Birth-year</th>
         <th>Actions</th>
         <th></th>
 	</tr>
 	<?php 
-	foreach ($this->readAllMovies() as $row):
-        /* @var Movie $row */
+	foreach ($this->readAllDirectors() as $directors):
+        /* @var Director $directors */
 	?>
-	<tr>
-		<td><?php echo $row->getTitle(); ?></td>
-		<td><?php echo $row->getAltTitle(); ?></td>
-		<td><?php echo $row->getDirector(); ?></td>
-		<td><?php echo $row->getCountry(); ?></td>
-		<td><?php echo $row->getYear(); ?></td>
-		<td>
-            <a class="btn btn-default" href="/index.php?page=update&id=<?php echo $row->getId(); ?>">Update</a>
-        </td>
-		<td>
-            <a class="btn btn-default" href="/index.php?page=show&id=<?php echo $row->getId(); ?>">Delete</a>
-        </td>
-	</tr>
+        <tr>
+            <td><?php echo $directors->getName(); ?></td>
+            <td><?php echo $directors->getBirthYear(); ?></td>
+            <td>
+                <a class="btn btn-default" href="/index.php?page=update&id=<?php echo $directors->getId(); ?>">Update</a>
+            </td>
+            <td>
+                <a class="btn btn-default" href="/index.php?page=show&id=<?php echo $directors->getId(); ?>">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td>Alternative Title</td>
+            <td>Country</td>
+            <td>Year</td>
+        </tr>
+        <?php
+        /* @var Movie $directorId */
+        foreach ($this->readMovies($directorId) as $movies):
+            /* @var Movie $movies */
+        ?>
+            <tr>
+                <td><?php echo $movies->getTitle(); ?></td>
+                <td><?php echo $movies->getAltTitle(); ?></td>
+                <td><?php echo $movies->getCountry(); ?></td>
+                <td><?php echo $movies->getYear(); ?></td>
+            </tr>
+        <?php endforeach ?>
 	<?php endforeach ?>
+
 </table>
 
 
