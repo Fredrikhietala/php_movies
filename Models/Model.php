@@ -8,14 +8,22 @@ class Model {
 	}
 
     public function readAll() {
-		$sql = 'SELECT * FROM `films`';
+		$sql = 'SELECT * FROM `director`';
 		$stm = $this->pdo->prepare($sql);
 		$stm->execute();
 		$results = $stm->fetchAll(PDO::FETCH_ASSOC);
 		return array_map(function ($item) {
-		    return new Movie($item);
+		    return new Director($item);
         }, $results);
 	}
+
+    public function readMovies($directorId) {
+        $sql = 'SELECT * FROM `films` WHERE `director_id` = :directorId';
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindValue(":directorId", $directorId);
+        $stm->execute();
+        return new Movie($stm->fetch(PDO::FETCH_ASSOC));
+    }
 
 	public function getById($id) {
 		$sql = 'SELECT * FROM `films` WHERE `id`=:id';
@@ -30,8 +38,8 @@ class Model {
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
         $stm->bindValue(":title", $movie->getTitle());
-        $stm->bindValue(":altTitle", $movie->getAltTitle());
-        $stm->bindValue(":director", $movie->getDirector());
+        $stm->bindValue(":alt_title", $movie->getAltTitle());
+        $stm->bindValue(":director", $movie->getDirectorId());
         $stm->bindValue(":country", $movie->getCountry());
         $stm->bindValue(":year", $movie->getYear());
         return $stm->execute();
@@ -41,8 +49,8 @@ class Model {
 		$sql = 'INSERT INTO `films` (`title`, `altTitle`, `director`, `country`, `year`) VALUES (:title, :altTitle, :director, :country, :year)';
 		$stm = $this->pdo->prepare($sql);
         $stm->bindValue(":title", $movie->getTitle());
-		$stm->bindValue(":altTitle",$movie->getAltTitle());
-		$stm->bindValue(":director",$movie->getDirector());
+		$stm->bindValue(":alt_title",$movie->getAltTitle());
+		$stm->bindValue(":director",$movie->getDirectorId());
 		$stm->bindValue(":country",$movie->getCountry());
 		$stm->bindValue(":year",$movie->getYear());
 		$success = $stm->execute();
@@ -58,5 +66,13 @@ class Model {
 	    $stm->bindparam(":id", $id);
 	    $stm->execute();
 	    return $stm->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteDirector($id) {
+        $sql = 'DELETE FROM `director` WHERE `id`=:id';
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindparam(":id", $id);
+        $stm->execute();
+        return $stm->fetch(PDO::FETCH_ASSOC);
     }
 }
