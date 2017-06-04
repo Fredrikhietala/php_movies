@@ -18,7 +18,7 @@ require "header.php";
             <td><?php echo $directors->getName(); ?></td>
             <td><?php echo $directors->getBirthYear(); ?></td>
             <td>
-                <a class="btn btn-default" href="/index.php?page=update&id=<?php echo $directors->getId(); ?>">Update</a>
+                <a class="btn btn-default" href="/index.php?page=update_director&id=<?php echo $directors->getId(); ?>">Update</a>
             </td>
             <td>
                 <a class="btn btn-default" href="/index.php?page=show&id=<?php echo $directors->getId(); ?>">Delete</a>

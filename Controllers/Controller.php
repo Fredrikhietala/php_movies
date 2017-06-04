@@ -23,7 +23,7 @@ Class Controller {
                 require "views/show.php";
                 break;
 
-            case ($page === "create"):
+            case ($page === "create_movie"):
                 if (isset($_POST['insert'])) {
                     $movie = new Movie();
                     $movie->setTitle($_POST['title']);
@@ -38,7 +38,7 @@ Class Controller {
                 require "views/create.php";
                 break;
 
-            case ($page === "update"):
+            case ($page === "update_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $movie = $this->getByMovieId($id);

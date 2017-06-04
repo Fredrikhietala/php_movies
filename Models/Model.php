@@ -38,7 +38,7 @@ class Model {
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
         $stm->bindValue(":title", $movie->getTitle());
-        $stm->bindValue(":alt_title", $movie->getAltTitle());
+        $stm->bindValue(":altTitle", $movie->getAltTitle());
         $stm->bindValue(":director", $movie->getDirectorId());
         $stm->bindValue(":country", $movie->getCountry());
         $stm->bindValue(":year", $movie->getYear());
@@ -46,11 +46,11 @@ class Model {
     }
 
     public function create(Movie $movie) {
-		$sql = 'INSERT INTO `films` (`title`, `altTitle`, `director`, `country`, `year`) VALUES (:title, :altTitle, :director, :country, :year)';
+		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `country`, `year`) VALUES (:director, :title, :altTitle, :country, :year)';
 		$stm = $this->pdo->prepare($sql);
-        $stm->bindValue(":title", $movie->getTitle());
-		$stm->bindValue(":alt_title",$movie->getAltTitle());
-		$stm->bindValue(":director",$movie->getDirectorId());
+        $stm->bindValue(":directorId",$movie->getDirectorId());
+		$stm->bindValue(":title", $movie->getTitle());
+		$stm->bindValue(":altTitle",$movie->getAltTitle());
 		$stm->bindValue(":country",$movie->getCountry());
 		$stm->bindValue(":year",$movie->getYear());
 		$success = $stm->execute();
@@ -59,6 +59,18 @@ class Model {
         }
 		    return $success;
 	}
+
+	public function createDirector(Director $director) {
+	    $sql = 'INSERT INTO `director` (`name`, `birth_year`) VALUES (:name, :birthYear)';
+	    $stm = $this->pdo->prepare($sql);
+	    $stm->bindValue(":name", $director->getName());
+	    $stm->bindValue(":birthYear", $director->getBirthYear());
+	    $success = $stm->execute();
+	    if ($success) {
+	        $director->setId($this->pdo->lastInsertId());
+        }
+            return $success;
+    }
 
 	public function delete($id) {
 	    $sql = 'DELETE FROM `films` WHERE `id`=:id';
