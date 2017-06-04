@@ -10,8 +10,8 @@ class Director
     {
         if (isset($director_data['id'])) {
             $this->id = $director_data['id'];
-            $this->name = $director_data['name'];
-            $this->birthYear = $director_data['birth_year'];
+            $this->name = @$director_data['name'];
+            $this->birthYear = @$director_data['birth_year'];
         }
     }
 
