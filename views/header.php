@@ -40,7 +40,8 @@
           <ul class="nav navbar-nav">
             <li><a href="../index.php?page=start">Home</a></li>
             <li><a href="../index.php?page=show">Show</a></li>
-            <li><a href="../index.php?page=create">Create</a></li>
+            <li><a href="../index.php?page=create_movie">Create Movie</a></li>
+            <li><a href="../index.php?page=create_director">Create Director</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
