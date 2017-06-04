@@ -61,6 +61,21 @@ Class Controller {
                     exit();
                 }
                 break;
+
+            case ($page === "update_director"):
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $director = $this->model->getDirectorById($id);
+                    require "views/update_director.php";
+                }
+                if (isset($_POST['btn-update'])) {
+                    $director = new Director($_POST);
+                    $update_success = $this->model->updateDirector($director);
+                    header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $director->getId());
+                    exit();
+                }
+                break;
+
             default:
                 require "views/start.php";
                 break;

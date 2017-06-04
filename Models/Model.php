@@ -42,15 +42,24 @@ class Model {
     }
 
 	public function update(Movie $movie) {
-        $sql = 'UPDATE `films` SET `title`=:title, `altTitle`=:altTitle, `director`=:director, `country`=:country, `year`=:year WHERE `id`=:id';
+        $sql = 'UPDATE `films` SET `director_id`=:directorId, `title`=:title, `alt_title`=:altTitle, `country`=:country, `year`=:year WHERE `id`=:id';
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
+        $stm->bindValue(":directorId", $movie->getDirectorId());
         $stm->bindValue(":title", $movie->getTitle());
         $stm->bindValue(":altTitle", $movie->getAltTitle());
-        $stm->bindValue(":director", $movie->getDirectorId());
         $stm->bindValue(":country", $movie->getCountry());
         $stm->bindValue(":year", $movie->getYear());
         return $stm->execute();
+    }
+
+    public function updateDirector(Director $director) {
+	    $sql = 'UPDATE `director` SET `name`=:name, `birth_year`=:birthYear WHERE `id`=:id';
+	    $stm = $this->pdo->prepare($sql);
+	    $stm->bindValue(":id", $director->getId());
+	    $stm->bindValue(":name", $director->getName());
+	    $stm->bindValue(":birthYear", $director->getBirthYear());
+	    return $stm->execute();
     }
 
     public function create(Movie $movie) {
