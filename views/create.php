@@ -5,8 +5,8 @@ require "header.php";
 
 <form id="create_movie" action="/index.php?page=create" method="post">
     <div class="form-group">
-        <label for="director">Director: </label>
-        <select class="form-control" id="director" name="director">
+        <label for="directorId">Director: </label>
+        <select class="form-control" id="directorId" name="directorId">
             <option value="">Choose Director</option>
             <?php
             foreach ($this->readAllDirectors() as $rows) :

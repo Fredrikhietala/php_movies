@@ -15,6 +15,10 @@ require "header.php";
         <label for="birth_year">Birth-year: </label>
         <input type="text" name="birth_year" class="form-control" id="birth_year" value="<?php echo $director->getBirthYear(); ?>" required>
     </div>
+    <div class="form-group">
+        <label for="nationality">Nationality: </label>
+        <input type="text" name="nationality" class="form-control" id="nationality" value="<?php echo $director->getNationality(); ?>" required>
+    </div>
     <button type="submit" class="btn btn-default" name="btn-update" id="btn-update">Update director</button>
 </form>
 
