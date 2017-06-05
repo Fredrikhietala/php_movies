@@ -25,10 +25,6 @@ require "header.php";
 		<input type="text" name="alt_title" class="form-control" id="altTitle" placeholder="Alternative title">
 	</div>
 	<div class="form-group">
-		<label for="country">Country: </label>
-		<input type="text" name="country" class="form-control" id="country" placeholder="Country">
-	</div>
-	<div class="form-group">
 		<label for="year">Year: </label>
 		<input type="text" name="year" class="form-control" id="year" placeholder="Year">
 	</div>

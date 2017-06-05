@@ -11,6 +11,10 @@ require "header.php";
         <label for="birthYear">Birth-year: </label>
         <input type="text" name="birthYear" class="form-control" id="birthYear" placeholder="Birth-year" required>
     </div>
+    <div class="form-group">
+        <label for="nationality">Nationality: </label>
+        <input type="text" name="nationality" class="form-control" id="nationality" placeholder="Nationality" required>
+    </div>
     <button type="submit" class="btn btn-default" name="insert" id="insert">Insert new director</button>
 </form>
 
