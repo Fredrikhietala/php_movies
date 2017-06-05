@@ -20,14 +20,15 @@ Class Controller {
                 break;
 
             case ($page === "delete_director"):
+                $id = $_GET['id'];
                 $this->deleteDirector($id);
-                require "/views/show.php";
+                require "views/show.php";
                 break;
 
             case ($page === "create_movie"):
                 if (isset($_POST['insert'])) {
                     $movie = new Movie();
-                    $movie->setDirectorId($_POST['director']);
+                    $movie->setDirectorId($_POST['directorId']);
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['altTitle']);
                     $movie->setYear($_POST['year']);
