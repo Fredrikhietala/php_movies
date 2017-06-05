@@ -23,7 +23,7 @@ require "header.php";
                 <a class="btn btn-default" href="/index.php?page=update_director&id=<?php echo $directors->getId(); ?>">Update</a>
             </td>
             <td>
-                <a class="btn btn-default" href="/index.php?page=show&id=<?php echo $directors->getId(); ?>">Delete</a>
+                <a class="btn btn-default" href="/index.php?page=delete_director&id=<?php echo $directors->getId(); ?>">Delete</a>
             </td>
         </tr>
         <tr>
