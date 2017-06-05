@@ -5,6 +5,7 @@ class Director
     private $id;
     private $name;
     private $birthYear;
+    private $nationality;
 
     public function __construct($director_data = [])
     {
@@ -12,6 +13,7 @@ class Director
             $this->id = $director_data['id'];
             $this->name = @$director_data['name'];
             $this->birthYear = @$director_data['birth_year'];
+            $this->nationality = @$director_data['nationality'];
         }
     }
 
@@ -61,5 +63,21 @@ class Director
     public function setBirthYear($birthYear)
     {
         $this->birthYear = $birthYear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNationality()
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * @param mixed $nationality
+     */
+    public function setNationality($nationality)
+    {
+        $this->nationality = $nationality;
     }
 }
