@@ -47,7 +47,7 @@ class Model {
 
 	public function update(Movie $movie) {
         $sql = 'UPDATE `films` 
-                SET `director_id`=:directorId, `title`=:title, `alt_title`=:altTitle, `year`=:year 
+                SET `director_id`=(SELECT `id` FROM `director` WHERE `name`=:name), `title`=:title, `alt_title`=:altTitle, `year`=:year 
                 WHERE `id`=:id';
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
@@ -57,7 +57,9 @@ class Model {
         $stm->bindValue(":year", $movie->getYear());
         return $stm->execute();
     }
-
+    /* UPDATE `films`
+    SET `director_id`=(SELECT `id` FROM `director` WHERE `name`='Martin Scorsese'), `title`='Taxi Driver', `alt_title`='Taxichauffören', `year`='1976'
+    WHERE `id` = 8*/
     public function updateDirector(Director $director) {
 	    $sql = 'UPDATE `director` 
                 SET `name`=:name, `birth_year`=:birthYear, `nationality`=:nationality 

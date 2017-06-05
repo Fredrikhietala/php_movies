@@ -26,6 +26,7 @@ Class Controller {
                 require "views/show_movies.php";
                 break;
 
+
             case ($page === "delete_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
@@ -37,7 +38,7 @@ Class Controller {
             case ($page === "create_movie"):
                 if (isset($_POST['insert'])) {
                     $movie = new Movie();
-                    $movie->setDirectorId($_POST['directorId']);
+                    $movie->setDirectorId($_GET['id']);
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['altTitle']);
                     $movie->setYear($_POST['year']);

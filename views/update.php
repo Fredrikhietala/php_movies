@@ -1,6 +1,6 @@
 <?php
 /* @var Movie $movie */
-/* @var Controller $this */
+/* @var Model $model */
 require "header.php";
 ?>
 
@@ -13,13 +13,12 @@ require "header.php";
         <select class="form-control" name="directorId" id="directorId">
             <option value="">Choose Director</option>
             <?php
-            foreach ($this->readAllDirectors() as $rows) :
+            foreach ($this->model->readAll() as $rows) :
                 /* @var Director $rows */
             ?>
-            <option value="<?php echo $rows->getName(); ?>"><?php echo $rows->getName(); ?></option>
+            <option value="<?php echo $rows->getId(); ?>"><?php echo $rows->getName(); ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="text" name="director_id" class="form-control" id="directorId" value="<?php echo $movie->getDirectorId(); ?>" required>
     </div>
     <div class="form-group">
 		<label for="title">Title: </label>

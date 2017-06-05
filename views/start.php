@@ -3,7 +3,7 @@ require "header.php";
 ?>
 
     <?php if (isset($_GET['success']) && $_GET['success']): ?>
-        <p>Your movie was successfully inserted! If you want to see your movie click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
+        <p>Your object was successfully inserted! If you want to see your object click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
     <?php endif; ?>
 
     <?php if (isset($_GET['success']) && !$_GET['success']): ?>
@@ -11,7 +11,7 @@ require "header.php";
     <?php endif; ?>
 
     <?php if (isset($_GET['update_success']) && $_GET['update_success']): ?>
-        <p>Your movie was successfully updated! If you want to see your movie click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
+        <p>Your object was successfully updated! If you want to see your object click <a href="/index.php?page=update&id=<?php echo $_GET['id'] ?>">here</a></p>
     <?php endif; ?>
 
     <?php if (isset($_GET['update_success']) && !$_GET['update_success']): ?>
