@@ -42,33 +42,32 @@ class Model {
     }
 
 	public function update(Movie $movie) {
-        $sql = 'UPDATE `films` SET `director_id`=:directorId, `title`=:title, `alt_title`=:altTitle, `country`=:country, `year`=:year WHERE `id`=:id';
+        $sql = 'UPDATE `films` SET `director_id`=:directorId, `title`=:title, `alt_title`=:altTitle, `year`=:year WHERE `id`=:id';
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
         $stm->bindValue(":directorId", $movie->getDirectorId());
         $stm->bindValue(":title", $movie->getTitle());
         $stm->bindValue(":altTitle", $movie->getAltTitle());
-        $stm->bindValue(":country", $movie->getCountry());
         $stm->bindValue(":year", $movie->getYear());
         return $stm->execute();
     }
 
     public function updateDirector(Director $director) {
-	    $sql = 'UPDATE `director` SET `name`=:name, `birth_year`=:birthYear WHERE `id`=:id';
+	    $sql = 'UPDATE `director` SET `name`=:name, `birth_year`=:birthYear, `nationality`=:nationality WHERE `id`=:id';
 	    $stm = $this->pdo->prepare($sql);
 	    $stm->bindValue(":id", $director->getId());
 	    $stm->bindValue(":name", $director->getName());
 	    $stm->bindValue(":birthYear", $director->getBirthYear());
+	    $stm->bindValue(":nationality", $director->getNationality());
 	    return $stm->execute();
     }
 
     public function create(Movie $movie) {
-		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `country`, `year`) VALUES (:directorId, :title, :altTitle, :country, :year)';
+		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `year`) VALUES (:directorId, :title, :altTitle, :year)';
 		$stm = $this->pdo->prepare($sql);
         $stm->bindValue(":directorId",$movie->getDirectorId());
 		$stm->bindValue(":title", $movie->getTitle());
 		$stm->bindValue(":altTitle",$movie->getAltTitle());
-		$stm->bindValue(":country",$movie->getCountry());
 		$stm->bindValue(":year",$movie->getYear());
 		$success = $stm->execute();
 		if ($success) {
@@ -78,10 +77,11 @@ class Model {
 	}
 
 	public function createDirector(Director $director) {
-	    $sql = 'INSERT INTO `director` (`name`, `birth_year`) VALUES (:name, :birthYear)';
+	    $sql = 'INSERT INTO `director` (`name`, `birth_year`, `nationality`) VALUES (:name, :birthYear, :nationality)';
 	    $stm = $this->pdo->prepare($sql);
 	    $stm->bindValue(":name", $director->getName());
 	    $stm->bindValue(":birthYear", $director->getBirthYear());
+	    $stm->bindValue(":nationality", $director->getNationality());
 	    $success = $stm->execute();
 	    if ($success) {
 	        $director->setId($this->pdo->lastInsertId());
