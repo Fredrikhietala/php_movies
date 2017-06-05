@@ -3,7 +3,7 @@
 require "header.php";
 ?>
 
-<form action="/index.php?page=create" method="post">
+<form id="create_movie" action="/index.php?page=create" method="post">
     <div class="form-group">
         <label for="director">Director: </label>
         <select class="form-control" id="director" name="director">
@@ -18,7 +18,7 @@ require "header.php";
     </div>
     <div class="form-group">
 		<label for="title">Title: </label>
-        <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
+        <input type="text" name="title" class="form-control" id="title" placeholder="Title">
 	</div>
 	<div class="form-group">
 		<label for="altTitle">Alternative title: </label>
@@ -26,12 +26,13 @@ require "header.php";
 	</div>
 	<div class="form-group">
 		<label for="country">Country: </label>
-		<input type="text" name="country" class="form-control" id="country" placeholder="Country" required>
+		<input type="text" name="country" class="form-control" id="country" placeholder="Country">
 	</div>
 	<div class="form-group">
 		<label for="year">Year: </label>
-		<input type="text" name="year" class="form-control" id="year" placeholder="Year" required>
+		<input type="text" name="year" class="form-control" id="year" placeholder="Year">
 	</div>
+    <p style="display: none;" id="error_message">Du måste fylla i alla formulärfält</p>
 	<button type="submit" class="btn btn-default" name="insert" id="insert">Insert new movie</button>
 </form>
 
