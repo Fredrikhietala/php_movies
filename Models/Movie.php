@@ -7,7 +7,6 @@ class Movie
     private $directorId;
     private $title;
     private $altTitle;
-    private $country;
     private $year;
 
     public function __construct($movie_data = [])
@@ -18,7 +17,6 @@ class Movie
             $this->directorId = @$movie_data['directorId'];
             $this->title = @$movie_data['title'];
             $this->altTitle = @$movie_data['altTitle'];
-            $this->country = @$movie_data['country'];
             $this->year = @$movie_data['year'];
         }
     }
@@ -61,16 +59,6 @@ class Movie
     public function setDirectorId($directorId)
     {
         $this->directorId = $directorId;
-    }
-
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    public function setCountry($country)
-    {
-        $this->country = $country;
     }
 
     public function getYear()
