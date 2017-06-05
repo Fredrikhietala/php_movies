@@ -13,15 +13,24 @@ Class Controller {
 
         switch ($page) {
             case ($page === "show"):
-                $movie = new Movie();
-                $directorId = $movie->getDirectorId();
-                $this->readMovies($directorId);
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $this->model->deleteDirector($id);
+                }
                 require "views/show.php";
                 break;
 
-            case ($page === "delete_director"):
+            case ($page === "show_movies"):
                 $id = $_GET['id'];
-                $this->deleteDirector($id);
+                $this->model->readMovies($id);
+                require "views/show_movies.php";
+                break;
+
+            case ($page === "delete_movie"):
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $this->model->delete($id);
+                }
                 require "views/show.php";
                 break;
 
@@ -32,7 +41,7 @@ Class Controller {
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['altTitle']);
                     $movie->setYear($_POST['year']);
-                    $success = $this->createMovie($movie);
+                    $success = $this->model->create($movie);
                     header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $movie->getId());
                     exit();
                 }
@@ -46,6 +55,8 @@ Class Controller {
                     $director->setBirthYear($_POST['birthYear']);
                     $director->setNationality($_POST['nationality']);
                     $success = $this->model->createDirector($director);
+                    header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $director->getId());
+                    exit();
                 }
                 require "views/create_director.php";
                 break;
@@ -53,12 +64,12 @@ Class Controller {
             case ($page === "update_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $movie = $this->getByMovieId($id);
+                    $movie = $this->model->getById($id);
                     require "views/update.php";
                 }
                 if (isset($_POST['btn-update'])) {
                     $movie = new Movie($_POST);
-                    $update_success = $this->updateMovie($movie);
+                    $update_success = $this->model->update($movie);
                     header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $movie->getId());
                     exit();
                 }
@@ -82,42 +93,5 @@ Class Controller {
                 require "views/start.php";
                 break;
         }
-    }
-
-    public function readAllDirectors() {
-
-        return $this->model->readAll();
-    }
-    public function readMovies ($directorId) {
-
-        return $this->model->readMovies($directorId);
-    }
-    public function getByMovieId($id) {
-
-        return $this->model->getById($id);
-    }
-    public function updateMovie($movie) {
-
-        return $this->model->update($movie);
-    }
-    public function createMovie ($movie) {
-
-        return $this->model->create($movie);
-    }
-    public function deleteMovie ($id) {
-
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $this->deleteMovie($id);
-        }
-        return $this->model->delete($id);
-    }
-    public function deleteDirector ($id) {
-
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $this->model->deleteDirector($id);
-        }
-        return $this->model->deleteDirector($id);
     }
 }

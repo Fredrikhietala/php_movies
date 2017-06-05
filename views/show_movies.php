@@ -3,7 +3,7 @@
 /* @var Director $director */
 require "header.php";
 ?>
-<h2>Movies by <?php echo $director->getName(); ?></h2>
+<h2>Movies by director</h2>
 <table class="table-striped">
     <tr>
         <th>Title</th>
