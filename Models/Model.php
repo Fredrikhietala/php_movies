@@ -47,7 +47,7 @@ class Model {
 
 	public function update(Movie $movie) {
         $sql = 'UPDATE `films` 
-                SET `director_id`=(SELECT `id` FROM `director` WHERE `name`=:name), `title`=:title, `alt_title`=:altTitle, `year`=:year 
+                SET `director_id`=:directorId, `title`=:title, `alt_title`=:altTitle, `year`=:year 
                 WHERE `id`=:id';
         $stm = $this->pdo->prepare($sql);
         $stm->bindValue(":id", $movie->getId());
@@ -57,9 +57,7 @@ class Model {
         $stm->bindValue(":year", $movie->getYear());
         return $stm->execute();
     }
-    /* UPDATE `films`
-    SET `director_id`=(SELECT `id` FROM `director` WHERE `name`='Martin Scorsese'), `title`='Taxi Driver', `alt_title`='Taxichauffören', `year`='1976'
-    WHERE `id` = 8*/
+
     public function updateDirector(Director $director) {
 	    $sql = 'UPDATE `director` 
                 SET `name`=:name, `birth_year`=:birthYear, `nationality`=:nationality 
@@ -73,17 +71,13 @@ class Model {
     }
 
     public function create(Movie $movie) {
-		$sql = 'INSERT INTO `films` (`title`, `alt_title`, `year`, `director_id`) 
-                SELECT :title, :altTitle, :year, :id
-                FROM `director`
-                WHERE `name` = :name';
+		$sql = 'INSERT INTO `films` (`director_id`, `title`, `alt_title`, `year`) 
+                VALUES (:directorId, :title, :altTitle, :year)';
 		$stm = $this->pdo->prepare($sql);
-		/* @var Director $director */
-        $stm->bindValue(":id",$director->getId());
+        $stm->bindValue(":directorId", $movie->getDirectorId());
 		$stm->bindValue(":title", $movie->getTitle());
-		$stm->bindValue(":altTitle",$movie->getAltTitle());
-		$stm->bindValue(":year",$movie->getYear());
-		$stm->bindValue(":name", $director->getName());
+		$stm->bindValue(":altTitle", $movie->getAltTitle());
+		$stm->bindValue(":year", $movie->getYear());
 		$success = $stm->execute();
 		if ($success) {
             $movie->setId($this->pdo->lastInsertId());

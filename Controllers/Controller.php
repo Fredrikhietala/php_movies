@@ -13,10 +13,6 @@ Class Controller {
 
         switch ($page) {
             case ($page === "show"):
-                if (isset($_GET['id'])) {
-                    $id = $_GET['id'];
-                    $this->model->deleteDirector($id);
-                }
                 require "views/show.php";
                 break;
 
@@ -26,19 +22,28 @@ Class Controller {
                 require "views/show_movies.php";
                 break;
 
+            case ($page === "delete_director"):
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $this->model->deleteDirector($id);
+                }
+                require "views/show.php";
+                break;
 
             case ($page === "delete_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $this->model->delete($id);
+                    header('Location: /index.php?page=show');
+                    exit();
                 }
-                require "views/show.php";
+                require "views/show_movies.php";
                 break;
 
             case ($page === "create_movie"):
-                if (isset($_POST['insert'])) {
+                if (isset($_POST['insert_movie'])) {
                     $movie = new Movie();
-                    $movie->setDirectorId($_GET['id']);
+                    $movie->setDirectorId($_POST['directorId']);
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['altTitle']);
                     $movie->setYear($_POST['year']);

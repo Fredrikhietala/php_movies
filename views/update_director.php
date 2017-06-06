@@ -12,8 +12,8 @@ require "header.php";
         <input type="text" name="name" class="form-control" id="name" value="<?php echo $director->getName(); ?>" required>
     </div>
     <div class="form-group">
-        <label for="birth_year">Birth-year: </label>
-        <input type="text" name="birth_year" class="form-control" id="birth_year" value="<?php echo $director->getBirthYear(); ?>" required>
+        <label for="birthYear">Birth-year: </label>
+        <input type="text" name="birthYear" class="form-control" id="birthYear" value="<?php echo $director->getBirthYear(); ?>" required>
     </div>
     <div class="form-group">
         <label for="nationality">Nationality: </label>

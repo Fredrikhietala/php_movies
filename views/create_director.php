@@ -8,8 +8,8 @@ require "header.php";
         <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
     </div>
     <div class="form-group">
-        <label for="birthYear">Birth-year: </label>
-        <input type="text" name="birthYear" class="form-control" id="birthYear" placeholder="Birth-year" required>
+        <label for="birthYear">Birthyear: </label>
+        <input type="text" name="birthYear" class="form-control" id="birthYear" placeholder="Birthyear" required>
     </div>
     <div class="form-group">
         <label for="nationality">Nationality: </label>

@@ -4,14 +4,13 @@
 require "header.php";
 ?>
 
-<form action="/index.php?page=update" method="post">
+<form action="/index.php?page=update_movie" method="post">
 	<div class="form-group">
         <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $movie->getId(); ?>" readonly>
     </div>
     <div class="form-group">
         <label for="directorId">Director: </label>
         <select class="form-control" name="directorId" id="directorId">
-            <option value="">Choose Director</option>
             <?php
             foreach ($this->model->readAll() as $rows) :
                 /* @var Director $rows */
@@ -26,13 +25,13 @@ require "header.php";
 	</div>
 	<div class="form-group">
 		<label for="altTitle">Alternative title: </label>
-		<input type="text" name="alt_title" class="form-control" id="altTitle" value="<?php echo $movie->getAltTitle(); ?>">
+		<input type="text" name="altTitle" class="form-control" id="altTitle" value="<?php echo $movie->getAltTitle(); ?>">
 	</div>
 	<div class="form-group">
 		<label for="year">Year: </label>
 		<input type="text" name="year" class="form-control" id="year" value="<?php echo $movie->getYear(); ?>" required>
 	</div>
-	<button type="submit" class="btn btn-default" name="btn-update">Update</button>
+	<button type="submit" class="btn btn-default" name="btn-update">Update movie</button>
 </form>
 
 <?php
