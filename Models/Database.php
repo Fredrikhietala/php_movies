@@ -13,17 +13,24 @@ class Database {
     * @return Model
     */
     public function getById($table, $id){
-        $stm = $this->pdo->prepare('SELECT * FROM '.$table.' WHERE id = :id');
+        $stm = $this->pdo->prepare('SELECT * FROM '.$table.' WHERE `id` = :id');
         $stm->bindValue(':id', $id);
         $success = $stm->execute();
         $row = $stm->fetch(PDO::FETCH_ASSOC);
         return ($success) ? $row: [];
     }
-    public function getAll($table){
+    public function readAll($table){
         $stm = $this->pdo->prepare('SELECT * FROM '.$table);
         $success = $stm->execute();
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
         return ($success) ? $rows: [];
+    }
+    public function readMovies($table, $id) {
+        $stm = $this->pdo->prepare('SELECT * FROM '.$table.' WHERE `director_id` = (SELECT `id` FROM `director` WHERE `id` =:id)');
+        $stm->bindValue(':id', $id);
+        $success = $stm->execute();
+        $row = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return ($success) ? $row: [];
     }
     public function create($table, $data) {
         $columns = array_keys($data);
@@ -46,7 +53,7 @@ class Database {
             return $item.'=:'.$item;
         }, $columns);
         $bindingSql = implode(',', $columns);
-        $sql = "UPDATE $table SET $bindingSql WHERE id = :id";
+        $sql = "UPDATE $table SET $bindingSql WHERE `id` = :id";
         $stm = $this->pdo->prepare($sql);
         $data['id'] = $id;
         foreach ($data as $key => $value){
