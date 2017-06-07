@@ -4,6 +4,8 @@ require "header.php";
 ?>
 <div class="row">
     <div class="col-lg-6 col-sm-12">
+      <?php $this->success() ?>
+      <?php $this->updateSuccess() ?>
     <h2>Directors</h2>
     <table class="table-striped">
         <tr>

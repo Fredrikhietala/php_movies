@@ -1,12 +1,30 @@
 <?php
 /* @var Database $db */
-/* @var Director $director */
 require "header.php";
 ?>
 <div class="row">
     <div class="col-lg-6 col-sm-12">
     <h2>Movies by director</h2>
     <table class="table-striped">
+        <tr>
+            <th>Director</th>
+            <th>Birth-year</th>
+            <th>Nationality</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <?php
+        /* @var Model $id */
+        $this->db->getById('director', $id);
+            /* @var Director $director */
+        ?>
+            <tr>
+                <td><?php echo $_GET['name']; ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         <tr>
             <th>Title</th>
             <th>Alternative Title</th>

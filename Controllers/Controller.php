@@ -48,8 +48,8 @@ Class Controller {
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['alt_title']);
                     $movie->setYear($_POST['year']);
-                    $success = $this->createMovies($movie);
-                    header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $movie->getId());
+                    $success_movie = $this->createMovies($movie);
+                    header('Location: /index.php?page=show&success_movie=' . (int)$success_movie . '&id=' . $movie->getId());
                     exit();
                 }
                 require "views/create.php";
@@ -61,8 +61,8 @@ Class Controller {
                     $director->setName($_POST['name']);
                     $director->setBirthYear($_POST['birth_year']);
                     $director->setNationality($_POST['nationality']);
-                    $success = $this->createDirector($director);
-                    header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $director->getId());
+                    $success_director = $this->createDirector($director);
+                    header('Location: /index.php?page=show&success_director=' . (int)$success_director . '&id=' . $director->getId());
                     exit();
                 }
                 require "views/create_director.php";
@@ -79,8 +79,8 @@ Class Controller {
             case ($page === "do_update_movie"):
                 if (isset($_POST['update_movie'])) {
                     $movie = new Movie($_POST);
-                    $update_success = $this->updateMovies($movie);
-                    header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $movie->getId());
+                    $update_success_movie = $this->updateMovies($movie);
+                    header('Location: /index.php?page=show&update_success_movie=' . (int)$update_success_movie . '&id=' . $movie->getId());
                     exit();
                 }
                 break;
@@ -96,8 +96,8 @@ Class Controller {
             case ($page === "do_update_director"):
                 if (isset($_POST['update_director'])) {
                     $director = new Director($_POST);
-                    $update_success = $this->updateDirector($director);
-                    header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $director->getId());
+                    $update_success_director = $this->updateDirector($director);
+                    header('Location: /index.php?page=show&update_success_director=' . (int)$update_success_director . '&id=' . $director->getId());
                     exit();
                 }
                 break;
@@ -124,5 +124,33 @@ Class Controller {
         return $this->db->create('director', $director->toArray());
     }
 
+    public function success() {
+        if (isset($_GET['success_movie']) && $_GET['success_movie']) {
+            echo "<p>Your movie was successfully inserted! If you want to see your movie click <a href='/index.php?page=update_movie&id=" .$_GET['id']. "'>Here</a></p>";
+        }
+        elseif (isset($_GET['success_director']) && $_GET['success_director']) {
+            echo "<p>Your director was successfully inserted! If you want to see your movie click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
+        }
+        elseif (isset($_GET['success_movie']) && !$_GET['success_movie']) {
+            echo "<p>Something went wrong!</p>";
+        }
+        elseif (isset($_GET['success_director']) && !$_GET['success_director']) {
+            echo "<p>Something went wrong!</p>";
+        }
+    }
 
+    public function updateSuccess() {
+        if (isset($_GET['update_success_movie']) && $_GET['update_success_movie']) {
+            echo "<p>Your movie was successfully updated! If you want to see your movie click <a href='/index.php?page=update_movie&id=" .$_GET['id']. "'>Here</a></p>";
+        }
+        elseif (isset($_GET['update_success_director']) && $_GET['update_success_director']) {
+            echo "<p>Your director was successfully updated! If you want to see your movie click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
+        }
+        elseif (isset($_GET['update_success_movie']) && !$_GET['update_success_movie']) {
+            echo "<p>Something went wrong!</p>";
+        }
+        elseif (isset($_GET['update_success_director']) && !$_GET['update_success_director']) {
+            echo "<p>Something went wrong!</p>";
+        }
+    }
 }
