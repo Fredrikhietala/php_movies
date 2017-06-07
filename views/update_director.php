@@ -19,7 +19,7 @@ require "header.php";
         <label for="nationality">Nationality: </label>
         <input type="text" name="nationality" class="form-control" id="nationality" value="<?php echo $director->getNationality(); ?>" required>
     </div>
-    <button type="submit" class="btn btn-default" name="btn-update" id="btn-update">Update director</button>
+    <button type="submit" class="btn btn-default" name="update_director" id="update_director">Update director</button>
 </form>
 
 <?php

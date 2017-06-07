@@ -31,7 +31,7 @@ require "header.php";
 		<label for="year">Year: </label>
 		<input type="text" name="year" class="form-control" id="year" value="<?php echo $movie->getYear(); ?>" required>
 	</div>
-	<button type="submit" class="btn btn-default" name="btn-update">Update movie</button>
+	<button type="submit" class="btn btn-default" name="update_movie">Update movie</button>
 </form>
 
 <?php
