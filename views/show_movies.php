@@ -1,5 +1,5 @@
 <?php
-/* @var Model $model */
+/* @var Database $db */
 /* @var Director $director */
 require "header.php";
 ?>
@@ -16,18 +16,17 @@ require "header.php";
         </tr>
         <?php
         /* @var Model $id */
-        foreach ($this->model->readMovies($id) as $movies):
-            /* @var Movie $movies */
+        foreach ($this->db->readMovies('films', $id) as $value):
             ?>
             <tr>
-                <td><?php echo $movies->getTitle(); ?></td>
-                <td><?php echo $movies->getAltTitle(); ?></td>
-                <td><?php echo $movies->getYear(); ?></td>
+                <td><?php echo $value['title']; ?></td>
+                <td><?php echo $value['alt_title']; ?></td>
+                <td><?php echo $value['year']; ?></td>
                 <td>
-                    <a class="btn btn-default" href="/index.php?page=update_movie&id=<?php echo $movies->getId(); ?>">Update</a>
+                    <a class="btn btn-default" href="/index.php?page=update_movie&id=<?php echo $value['id']; ?>">Update</a>
                 </td>
                 <td>
-                    <a class="btn btn-default" href="/index.php?page=delete_movie&id=<?php echo $movies->getId(); ?>">Delete</a>
+                    <a class="btn btn-default" href="/index.php?page=delete_movie&id=<?php echo $value['id'] ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

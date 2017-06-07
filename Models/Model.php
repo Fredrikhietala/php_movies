@@ -8,7 +8,7 @@ abstract class Model {
 	private $db;
 	protected $table = '';
 
-	public function __construct(Database $db, $modelData = []) {
+	public function __construct(Database $db) {
         $this->db = $db;
 	}
 

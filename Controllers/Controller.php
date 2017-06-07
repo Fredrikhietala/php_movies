@@ -1,10 +1,10 @@
 <?php
 
 Class Controller {
-    private $model;
+    private $db;
 
-    public function __construct(PDO $pdo) {
-        $this->model = new Model($pdo);
+    public function __construct(Database $db) {
+        $this->db = $db;
     }
 
     public function index() {
@@ -13,19 +13,20 @@ Class Controller {
 
         switch ($page) {
             case ($page === "show"):
+                $this->db->readAll('director');
                 require "views/show.php";
                 break;
 
             case ($page === "show_movies"):
                 $id = $_GET['id'];
-                $this->model->readMovies($id);
+                $this->db->readMovies('films', $id);
                 require "views/show_movies.php";
                 break;
 
             case ($page === "delete_director"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $this->model->deleteDirector($id);
+                    $this->db->delete('director',$id);
                 }
                 require "views/show.php";
                 break;
@@ -33,7 +34,7 @@ Class Controller {
             case ($page === "delete_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $this->model->delete($id);
+                    $this->db->delete('films',$id);
                     header('Location: /index.php?page=show');
                     exit();
                 }
@@ -43,11 +44,11 @@ Class Controller {
             case ($page === "create_movie"):
                 if (isset($_POST['insert_movie'])) {
                     $movie = new Movie();
-                    $movie->setDirectorId($_POST['directorId']);
+                    $movie->setDirectorId($_POST['director_id']);
                     $movie->setTitle($_POST['title']);
-                    $movie->setAltTitle($_POST['altTitle']);
+                    $movie->setAltTitle($_POST['alt_title']);
                     $movie->setYear($_POST['year']);
-                    $success = $this->model->create($movie);
+                    $success = $this->createMovies($movie);
                     header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $movie->getId());
                     exit();
                 }
@@ -55,12 +56,12 @@ Class Controller {
                 break;
 
             case ($page === "create_director"):
-                if (isset($_POST['insert'])) {
+                if (isset($_POST['insert_director'])) {
                     $director = new Director();
                     $director->setName($_POST['name']);
-                    $director->setBirthYear($_POST['birthYear']);
+                    $director->setBirthYear($_POST['birth_year']);
                     $director->setNationality($_POST['nationality']);
-                    $success = $this->model->createDirector($director);
+                    $success = $this->createDirector($director);
                     header('Location: /index.php?page=start&success=' . (int)$success . '&id=' . $director->getId());
                     exit();
                 }
@@ -70,12 +71,15 @@ Class Controller {
             case ($page === "update_movie"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $movie = $this->model->getById($id);
+                    $movie = $this->db->getById('films', $id);
                     require "views/update.php";
                 }
-                if (isset($_POST['btn-update'])) {
+                break;
+
+            case ($page === "do_update_movie"):
+                if (isset($_POST['update_movie'])) {
                     $movie = new Movie($_POST);
-                    $update_success = $this->model->update($movie);
+                    $update_success = $this->updateMovies($movie);
                     header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $movie->getId());
                     exit();
                 }
@@ -84,12 +88,15 @@ Class Controller {
             case ($page === "update_director"):
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $director = $this->model->getDirectorById($id);
+                    $director = $this->db->getById('director', $id);
                     require "views/update_director.php";
                 }
-                if (isset($_POST['btn-update'])) {
+                break;
+
+            case ($page === "do_update_director"):
+                if (isset($_POST['update_director'])) {
                     $director = new Director($_POST);
-                    $update_success = $this->model->updateDirector($director);
+                    $update_success = $this->updateDirector($director);
                     header('Location: /index.php?page=start&update_success=' . (int)$update_success . '&id=' . $director->getId());
                     exit();
                 }
@@ -100,4 +107,22 @@ Class Controller {
                 break;
         }
     }
+
+    public function updateMovies(Movie $movie) {
+        return $this->db->update('films', $movie->getId(), $movie->toArray());
+    }
+
+    public function updateDirector(Director $director) {
+        return $this->db->update('director', $director->getId(), $director->toArray());
+    }
+
+    public function createMovies(Movie $movie) {
+        return $this->db->create('films', $movie->toArray());
+    }
+
+    public function createDirector(Director $director) {
+        return $this->db->create('director', $director->toArray());
+    }
+
+
 }

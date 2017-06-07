@@ -70,4 +70,14 @@ class Movie
     {
         $this->year = $year;
     }
+
+    public function toArray() {
+        return [
+            "id" => $this->getId(),
+            "director_id" => $this->getDirectorId(),
+            "title" => $this->getTitle(),
+            "alt_title" => $this->getAltTitle(),
+            "year" => $this->getYear()
+        ];
+    }
 }

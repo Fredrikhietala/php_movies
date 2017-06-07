@@ -80,4 +80,13 @@ class Director
     {
         $this->nationality = $nationality;
     }
+
+    public function toArray () {
+        return [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "birth_year" => $this->getBirthYear(),
+            "nationality" => $this->getNationality()
+        ];
+    }
 }

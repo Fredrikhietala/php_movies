@@ -1,5 +1,5 @@
 <?php
-/* @var Model $model */
+/* @var Controller $this */
 require "header.php";
 ?>
 <div class="row">
@@ -15,21 +15,20 @@ require "header.php";
             <th>Info</th>
         </tr>
         <?php
-        foreach ($this->model->readAll() as $directors):
-            /* @var Director $directors */
+        foreach ($this->db->readAll('director') as $value):
         ?>
             <tr>
-                <td><?php echo $directors->getName(); ?></td>
-                <td><?php echo $directors->getBirthYear(); ?></td>
-                <td><?php echo $directors->getNationality();?></td>
+                <td><?php echo $value['name']; ?></td>
+                <td><?php echo $value['birth_year']; ?></td>
+                <td><?php echo $value['nationality'];?></td>
                 <td>
-                    <a class="btn btn-default" href="/index.php?page=update_director&id=<?php echo $directors->getId(); ?>">Update</a>
+                    <a class="btn btn-default" href="/index.php?page=update_director&id=<?php echo $value['id']; ?>">Update</a>
                 </td>
                 <td>
-                    <a class="btn btn-default" href="/index.php?page=delete_director&id=<?php echo $directors->getId(); ?>">Delete</a>
+                    <a class="btn btn-default" href="/index.php?page=delete_director&id=<?php echo $value['id']; ?>">Delete</a>
                 </td>
                 <td>
-                    <a class="btn btn-default" href="/index.php?page=show_movies&id=<?php echo $directors->getId(); ?>">Info</a>
+                    <a class="btn btn-default" href="/index.php?page=show_movies&id=<?php echo $value['id']; ?>">Info</a>
                 </td>
             </tr>
         <?php endforeach; ?>

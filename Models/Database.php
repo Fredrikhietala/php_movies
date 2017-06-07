@@ -48,6 +48,8 @@ class Database {
         return ($status) ? $this->pdo->lastInsertId() : false;
     }
     public function update($table, $id, $data) {
+        if (isset($data['id']))
+            unset($data['id']);
         $columns = array_keys($data);
         $columns = array_map(function($item){
             return $item.'=:'.$item;
