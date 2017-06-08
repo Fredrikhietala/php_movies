@@ -20,6 +20,8 @@ Class Controller {
             case ($page === "show_movies"):
                 $id = $_GET['id'];
                 $this->db->readMovies('films', $id);
+                $id = $_GET['id'];
+                $director = $this->db->getById('director', $id);
                 require "views/show_movies.php";
                 break;
 
@@ -48,8 +50,8 @@ Class Controller {
                     $movie->setTitle($_POST['title']);
                     $movie->setAltTitle($_POST['alt_title']);
                     $movie->setYear($_POST['year']);
-                    $success_movie = $this->createMovies($movie);
-                    header('Location: /index.php?page=show&success_movie=' . (int)$success_movie . '&id=' . $movie->getId());
+                    $insert_success_movie = $this->createMovies($movie);
+                    header('Location: /index.php?page=show&insert_success_movie=' . (int)$insert_success_movie . '&id=' . $movie->getId());
                     exit();
                 }
                 require "views/create.php";
@@ -61,8 +63,8 @@ Class Controller {
                     $director->setName($_POST['name']);
                     $director->setBirthYear($_POST['birth_year']);
                     $director->setNationality($_POST['nationality']);
-                    $success_director = $this->createDirector($director);
-                    header('Location: /index.php?page=show&success_director=' . (int)$success_director . '&id=' . $director->getId());
+                    $insert_success_director = $this->createDirector($director);
+                    header('Location: /index.php?page=show&insert_success_director=' . (int)$insert_success_director . '&id=' . $director->getId());
                     exit();
                 }
                 require "views/create_director.php";
@@ -125,16 +127,16 @@ Class Controller {
     }
 
     public function success() {
-        if (isset($_GET['success_movie']) && $_GET['success_movie']) {
+        if (isset($_GET['insert_success_movie']) && $_GET['insert_success_movie']) {
             echo "<p>Your movie was successfully inserted! If you want to see your movie click <a href='/index.php?page=update_movie&id=" .$_GET['id']. "'>Here</a></p>";
         }
-        elseif (isset($_GET['success_director']) && $_GET['success_director']) {
-            echo "<p>Your director was successfully inserted! If you want to see your movie click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
+        elseif (isset($_GET['insert_success_director']) && $_GET['insert_success_director']) {
+            echo "<p>Your director was successfully inserted! If you want to see your director click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
         }
-        elseif (isset($_GET['success_movie']) && !$_GET['success_movie']) {
+        elseif (isset($_GET['insert_success_movie']) && !$_GET['insert_success_movie']) {
             echo "<p>Something went wrong!</p>";
         }
-        elseif (isset($_GET['success_director']) && !$_GET['success_director']) {
+        elseif (isset($_GET['insert_success_director']) && !$_GET['insert_success_director']) {
             echo "<p>Something went wrong!</p>";
         }
     }
@@ -144,7 +146,7 @@ Class Controller {
             echo "<p>Your movie was successfully updated! If you want to see your movie click <a href='/index.php?page=update_movie&id=" .$_GET['id']. "'>Here</a></p>";
         }
         elseif (isset($_GET['update_success_director']) && $_GET['update_success_director']) {
-            echo "<p>Your director was successfully updated! If you want to see your movie click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
+            echo "<p>Your director was successfully updated! If you want to see your director click <a href='/index.php?page=update_director&id=" .$_GET['id']. "'>Here</a></p>";
         }
         elseif (isset($_GET['update_success_movie']) && !$_GET['update_success_movie']) {
             echo "<p>Something went wrong!</p>";

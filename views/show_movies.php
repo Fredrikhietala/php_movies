@@ -16,12 +16,12 @@ require "header.php";
         <?php
         /* @var Model $id */
         $this->db->getById('director', $id);
-            /* @var Director $director */
+            /* @var Controller $director */
         ?>
-            <tr>
-                <td><?php echo $_GET['name']; ?></td>
-                <td></td>
-                <td></td>
+            <tr class="show_director">
+                <td><?php echo $director['name']; ?></td>
+                <td><?php echo $director['birth_year']; ?></td>
+                <td><?php echo $director['nationality']; ?> </td>
                 <td></td>
                 <td></td>
             </tr>
