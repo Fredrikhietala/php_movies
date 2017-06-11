@@ -51,7 +51,7 @@ Class Controller {
                     $movie->setAltTitle($_POST['alt_title']);
                     $movie->setYear($_POST['year']);
                     $insert_success_movie = $this->createMovies($movie);
-                    header('Location: /index.php?page=show&insert_success_movie=' . (int)$insert_success_movie . '&id=' . $movie->getId());
+                    header('Location: /index.php?page=show&insert_success_movie=' . (bool)$insert_success_movie . '&id=' . $movie->getId());
                     exit();
                 }
                 require "views/create.php";
@@ -64,7 +64,7 @@ Class Controller {
                     $director->setBirthYear($_POST['birth_year']);
                     $director->setNationality($_POST['nationality']);
                     $insert_success_director = $this->createDirector($director);
-                    header('Location: /index.php?page=show&insert_success_director=' . (int)$insert_success_director . '&id=' . $director->getId());
+                    header('Location: /index.php?page=show&insert_success_director=' . (bool)$insert_success_director . '&id=' . $director->getId());
                     exit();
                 }
                 require "views/create_director.php";
